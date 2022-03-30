@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import classes from "./eventdetails.module.css";
 import { Button, Image, Modal, Typography } from "antd";
 import Footer from "../../../../components/footer/Footer";
+import {useAppContext} from '../../../../context/state'
 import {
   Form,
   Input,
@@ -41,14 +42,22 @@ const tailFormItemLayout = {
 function CompetitionDetails() {
   const router = useRouter();
   const { event } = router.query;
+  const value = useAppContext();
+  let { isRegisterVisible, setisRegisterVisible } = value.state;
+  const initalRegisterValue = isRegisterVisible
   const [eventDetails, seteventDetails] = useState({});
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(initalRegisterValue);
   const [navVisible, setnavVisible] = useState(false)
   const [otpVerify, setOtpVerify] = useState({
     otp: null,
     verifed: false,
     phone_no: null,
   });
+
+  useEffect(() => {
+    setisRegisterVisible(false)
+  }, [])
+  
   let filteredEventData;
   useEffect(async () => {
     if (router.isReady) {

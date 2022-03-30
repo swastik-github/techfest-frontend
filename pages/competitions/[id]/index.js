@@ -4,12 +4,15 @@ import { Card, Divider, Modal } from "antd";
 import Footer from "../../../components/footer/Footer";
 import eventData from "../../../utilites/eventsdata";
 import classes from "./eventlist.module.css";
+import {useAppContext} from "../../../context/state";
 function CompetitionDetails() {
   const router = useRouter();
   const { id } = router.query;
   const [visible, setVisible] = useState(false);
   let filteredEventData;
   const [eventList, seteventList] = useState([]);
+  const value = useAppContext();
+  let { setisRegisterVisible } = value.state;
   useEffect(() => {
     if (router.isReady) {
       //   const response = await axios(`http://localhost:1000/competitions/${id}`);
@@ -114,7 +117,11 @@ function CompetitionDetails() {
                 <div style={{ cursor: "pointer" }} className={classes.explore}>
                   <div
                     onClick={() => {
-                      // router.push(`/competitons/${id}/${item._id}`);
+                      setisRegisterVisible(true)
+                      router.push(
+                        `/competitions/[id]/[event]`,
+                        `/competitions/${id}/${item._id}`
+                      );
                     }}
                     className={classes.register_btn}
                     style={{

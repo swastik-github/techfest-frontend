@@ -2,13 +2,11 @@
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
-    url(../../../../public/images/software.jpeg);
+    url(../../../../public/images/b1.jpg);
   background-size: contain;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   background-size: 100% 100%;
   overflow: hidden;
-  text-align: center;
 }
 .container_box {
   display: flex;
