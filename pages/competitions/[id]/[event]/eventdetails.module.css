@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
-    url(../../../../public/images/b1.jpg);
+    url(../../../../public/images/software.jpeg);
   background-size: contain;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -22,7 +22,6 @@
 .navbar {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0  20px 0 0;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -84,16 +83,23 @@
   font-weight: 900;
 }
 
-
 @media screen and (max-width: 790px) {
   .navitems{
     display: none;
   }
   .hamburger{
     display: block;
+    margin-right: 5vw;
   }
- 
+ .event_img{
+   width: 300px !important;
+ }
+  .container .logo{
+    margin-left: 5vw;
+    width: 8rem;
+  }
 }
+
 @media only screen and (max-width: 800px) {
   .container_box {
     flex-direction: column;

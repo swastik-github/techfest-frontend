@@ -1,23 +1,31 @@
+import { useRouter } from "next/router";
 import React from "react";
 import classes from "./Footer.module.css";
 const Footer = () => {
+  const router = useRouter()
   return (
     <div className={classes.container}>
       <div className={classes.box1}>
         <span>
           Quick Link
         </span>
-        <p>lorem ipsum</p>
-        <p>lorem ipsum</p>
-        <p>lorem ipsum</p>
+        <p onClick={()=>{
+          router.replace('/')
+        }} >home</p>
+        <p onClick={()=>{
+          router.replace('/about')
+        }} >about</p>
+        <p onClick={()=>{
+          router.replace('/contact')
+        }} >contact</p>
       </div>
       <div className={classes.box2}>
         <span>
           Our Team
         </span>
         <p>Oriental College of Technology</p>
-        <p>lorem ipsum</p>
-        <p>lorem ipsum</p>
+        <p>oistbpl@oriental.ac.in</p>
+        <p>0755-2529026</p>
       </div>
       <div className={classes.box3}>
         <span className={classes.span}>

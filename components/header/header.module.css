@@ -1,6 +1,7 @@
 .navbar {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 }
 .navitems {
@@ -29,7 +30,7 @@
   width: 11rem;
   left: 70px;
   margin-top: 8px;
-  margin-left: 40px;
+  margin-left: 60px;
 }
 .container02 {
   display: flex;
@@ -81,16 +82,34 @@
   color: white;
   margin-top: 5rem;
 }
+.modalnav{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal_item{
+  color: black;
+  font-size: 32px;
+}
+
+.hamburger{
+  display: none;
+}
 @media screen and (max-width: 790px) {
-  .container img {
-    width: 5rem;
-    margin-top: 46px;
+  .navitems{
+    display: none;
   }
-  .container02 h1 {
-    width: max-content;
-    margin-left: 15rem;
+  .hamburger{
+    display: block;
+    margin-right: 10vw;
+  }
+ 
+  .container .logo{
+    margin-left: 10vw;
+    width: 8rem;
   }
 }
+
 @media screen and (max-width: 600px) {
   .navitems {
     margin: 54px -59px;
@@ -98,7 +117,5 @@
   .slider {
     margin-left: 110px;
   }
-  .container img {
-    margin-left: 0px;
-  }
+ 
 }

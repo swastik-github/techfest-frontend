@@ -43,6 +43,7 @@ function CompetitionDetails() {
   const { event } = router.query;
   const [eventDetails, seteventDetails] = useState({});
   const [visible, setVisible] = useState(false);
+  const [navVisible, setnavVisible] = useState(false)
   const [otpVerify, setOtpVerify] = useState({
     otp: null,
     verifed: false,
@@ -112,35 +113,43 @@ function CompetitionDetails() {
             <span>COMPETITIONS</span>{" "}
           </li>
         </ul>
-        <img onClick={()=>{setVisible(true)}} className={classes.hamburger} style={{width:'50px', height:'50px'}} src='/images/hamburger.png' />
+        <img onClick={()=>{setnavVisible(true)}} className={classes.hamburger} style={{width:'30px', height:'30px'}} src='/images/hamburger.png' />
         {/* <Hamburger/> */}
       </div>
       <Modal
         centered
         footer={null}
-        visible={visible}
+        visible={navVisible}
         className={classes.nav_modal}
-        onOk={() => setVisible(false)}
-        onCancel={() => setVisible(false)}
+        onOk={() => setnavVisible(false)}
+        onCancel={() => setnavVisible(false)}
         width={1000}
       >
           <div className={classes.modalnav}>
-          <p className={classes.modal_item}>Home</p>
-          <p className={classes.modal_item}>About</p>
-          <p className={classes.modal_item}>Contact</p>
-          <p className={classes.register}>
+          <p onClick={()=>{
+            router.replace('/')
+          }} className={classes.modal_item}>Home</p>
+          <p onClick={()=>{
+            router.replace('/about')
+          }} className={classes.modal_item}>About</p>
+          <p onClick={()=>{
+            router.replace('/contact')
+          }} className={classes.modal_item}>Contact</p>
+          <p onClick={()=>{
+            router.replace('/competitions')
+          }} className={classes.register}>
             {" "}
             <span>COMPETITIONS</span>{" "}
           </p>
         </div>
       </Modal>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding:"0 20px" }}>
-        <Title style={{ color: "white", fontSize: "48px", margin: "20px auto" ,textTransform:'uppercase' }}>
+        <Title style={{ color: "white", fontSize: "40px", margin: "20px auto" ,textTransform:'uppercase' }}>
           Event Details
         </Title>
         <div className={classes.container_box}>
           <div className={classes.img_container} >
-            <Image  src="https://picsum.photos/300/400" />
+            <Image className={classes.event_img}  src="https://picsum.photos/300/400" />
           </div>
           <div
             style={{
@@ -156,7 +165,7 @@ function CompetitionDetails() {
                 alignItems: "start",
               }}
             >
-              <Title style={{ margin: "0", fontSize: "64px", color: "white" }}>
+              <Title style={{ margin: "0", fontSize: "60px", color: "white" }}>
                 {eventDetails.title}
               </Title>
             </div>
@@ -171,7 +180,7 @@ function CompetitionDetails() {
               <Text  style={{color:'white', padding:'10px 0', fontSize:"16px"}} >{eventDetails.descriptions} </Text>
               <Button
                 onClick={() => setVisible(true)}
-                style={{ width: "18%" , margin:"10px 0"}}
+                style={{ margin:"10px 0"}}
                 type="primary"
               >
                 Register
@@ -200,7 +209,7 @@ function CompetitionDetails() {
                 )}
               </Text>
               <Title style={{ color: "white" ,marginTop:"15px" }}>Rules</Title>
-              <ul style={{ listStyletype: "circle", textAlign: "start" }}>
+              <ul  style={{ listStyletype: "circle", textAlign: "start" }}>
                 {eventDetails?.event_rules?.map((item) => {
                   return <li style={{ padding:'5px 0', fontSize:"16px"}} >{item}</li>;
                 })}

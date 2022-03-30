@@ -1,10 +1,10 @@
 .slider {
   width: 70%;
-  height: 50vh;
   position: relative;
+  overflow: hidden;
   z-index: 1;
   background: #f3f3f3;
- margin: 0 auto;
+  margin: 0 auto;
 }
 
 .prev {
@@ -25,10 +25,10 @@
   background: none;
 }
 .nextbtn {
-  width: 4rem !important;
+  width: 5vh !important;
 }
 .prevbtn {
-  width: 4rem !important;
+  width: 5vh !important;
 }
 
 .dots {
@@ -39,8 +39,8 @@
 }
 
 .slide {
-  height: 50vh;
   display: flex;
+  max-height: 40vh;
   justify-content: center;
   align-items: center;
   font-size: 100px;
@@ -58,13 +58,27 @@
   min-width: 100%;
   min-height: 100% */
   width: 100%;
-   height: auto;
-   background-size: cover;
-   background-repeat: no-repeat;
-   background-position: center;
+  height: 100%;
+  object-fit: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-@media screen and (max-width: 1000px) {
-  .slider {
-    margin-left: 150px;
+@media screen and (max-width: 700px) {
+
+  .slider{
+    width: 80%;
   }
+  .slide{
+    height: 30vh;
+  }  
+ 
+}
+@media screen and (max-width: 500px) {
+
+
+  .slide{
+    height: 20vh;
+  }  
+ 
 }

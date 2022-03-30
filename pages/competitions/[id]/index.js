@@ -42,7 +42,7 @@ function CompetitionDetails() {
             <span>COMPETITIONS</span>{" "}
           </li>
         </ul>
-        <img onClick={()=>{setVisible(true)}} className={classes.hamburger} style={{width:'50px', height:'50px'}} src='/images/hamburger.png' />
+        <img onClick={()=>{setVisible(true)}} className={classes.hamburger} style={{width:'30px', height:'30px'}} src='/images/hamburger.png' />
         {/* <Hamburger/> */}
       </div>
       <Modal
@@ -73,7 +73,7 @@ function CompetitionDetails() {
         </div>
       </Modal>
       <h1
-        style={{ color: "white", textTransform: "uppercase", fontSize: "54px" }}
+        style={{ color: "white", textTransform: "uppercase", fontSize: "40px" }}
       >
         {router.query.id} Events
       </h1>

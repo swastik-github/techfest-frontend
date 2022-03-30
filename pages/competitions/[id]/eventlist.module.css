@@ -199,6 +199,11 @@
   }
   .hamburger{
     display: block;
+    margin-right: 5vw;
   }
  
+  .container .logo{
+    margin-left: 5vw;
+    width: 8rem;
+  }
 }

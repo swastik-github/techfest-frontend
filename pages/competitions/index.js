@@ -3,6 +3,7 @@ import { Card , Modal} from "antd";
 import { useRouter } from "next/router";
 import classes from "./competition.module.css";
 import clsx from 'clsx';
+import Footer from "../../components/footer/Footer";
 function Competitions() {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
@@ -28,7 +29,7 @@ function Competitions() {
             <span>COMPETITIONS</span>{" "}
           </li>
         </ul>
-        <img onClick={()=>{setVisible(true)}} className={classes.hamburger} style={{width:'50px', height:'50px'}} src='/images/hamburger.png' />
+        <img onClick={()=>{setVisible(true)}} className={classes.hamburger} style={{width:'30px', height:'30px'}} src='/images/hamburger.png' />
         {/* <Hamburger/> */}
       </div>
       <Modal
@@ -50,7 +51,7 @@ function Competitions() {
           </p>
         </div>
       </Modal>
-      <h1 style={{ color: "white", fontSize: "4vw" }}>COMPETITONS</h1>
+      <h1 className={classes.h1line}>COMPETITONS</h1>
       <div className={classes.site_card_wrapper}>
         <Card
           onClick={() => router.push("/competitions/technical")}
@@ -102,7 +103,7 @@ function Competitions() {
           </div>
         </Card>
       </div>
-     
+     <Footer/>
     </div>
   );
 }

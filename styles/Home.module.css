@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.4)), url(../public/images/software.jpeg);
-  background-size: contain;
+  background-size: 100% 100%;
   overflow: hidden;
+  background-repeat: no-repeat;
 }
