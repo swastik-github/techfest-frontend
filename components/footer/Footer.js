@@ -37,12 +37,39 @@ const Footer = () => {
         <p>0755-2529026</p>
       </div>
       <div className={classes.box3}>
-        <span style={{marginBottom:"10px"}} className={classes.span}>Contact Us</span>
+        <span style={{ marginBottom: "10px" }} className={classes.span}>
+          Contact Us
+        </span>
         <div className={classes.socialMedia}>
-          <Image width={43} height={43} src={"/images/instagram.png"} alt="" />
-          <Image width={43} height={43} src={"/images/facebook.png"} alt="" />
-          <Image width={43} height={43} src={"/images/twitter.png"} alt="" />
-          <Image width={43} height={43} src={"/images/youtube.png"} alt="" />
+          <a
+            href="https://www.instagram.com/techfizz2022"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              width={43}
+              height={43}
+              src={"/images/instagram.png"}
+              alt=""
+            />
+          </a>
+          <a
+            href="https://www.facebook.com/Techfizz-102511429093163/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image width={43} height={43} src={"/images/facebook.png"} alt="" />
+          </a>
+          <a href="" target="_blank" rel="noopener noreferrer">
+            <Image width={43} height={43} src={"/images/twitter.png"} alt="" />
+          </a>
+          <a
+            href="https://www.youtube.com/watch?v=Y1xGqD_icBY"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image width={43} height={43} src={"/images/youtube.png"} alt="" />
+          </a>
         </div>
       </div>
     </div>

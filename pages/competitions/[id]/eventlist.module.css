@@ -103,6 +103,7 @@
 .headLine:hover ~ .blurBackground {
   backdrop-filter: blur(4px);
 }
+
 /* navbar css */
 .navbar {
   max-width: 1600px;

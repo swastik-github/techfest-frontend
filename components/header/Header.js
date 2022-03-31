@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <div className={classes.container}>
       <div className={classes.navbar}>
-        <img  onClick={()=>{router.replace('/')}} src={"/images/logo.png"} className={classes.logo} alt="" />
+        <img style={{cursor:'pointer'}}  onClick={()=>{router.replace('/')}} src={"/images/logo.png"} className={classes.logo} alt="" />
 
         <ul className={classes.navitems}>
           <li onClick={()=>{

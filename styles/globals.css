@@ -35,7 +35,7 @@ li {
 }
 /* Event List css */
 .ant-card{
-  background-color: none;
+  background: none !important;
 }
 .ant-card-body {
   padding: 0px !important;
