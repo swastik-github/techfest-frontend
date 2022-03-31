@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import classes from "./eventdetails.module.css";
 import { Button, Image, Modal, Typography } from "antd";
-import Footer from "../../../../components/footer/Footer";
 import {useAppContext} from '../../../../context/state'
 import {
   Form,
@@ -47,7 +46,6 @@ function CompetitionDetails() {
   const initalRegisterValue = isRegisterVisible
   const [eventDetails, seteventDetails] = useState({});
   const [visible, setVisible] = useState(initalRegisterValue);
-  const [navVisible, setnavVisible] = useState(false)
   const [otpVerify, setOtpVerify] = useState({
     otp: null,
     verifed: false,
@@ -102,56 +100,7 @@ function CompetitionDetails() {
 
   return (
     <div className={classes.container} style={{ textAlign: "center" }}>
-    <div className={classes.navbar}>
-        <img  onClick={()=>{router.replace('/')}} src={"/images/logo.png"} className={classes.logo} alt="" />
-
-        <ul className={classes.navitems}>
-        <li onClick={()=>{
-            router.replace('/')
-          }} className={classes.items}>Home</li>
-          <li onClick={()=>{
-            router.replace('/about')
-          }} className={classes.items}>About</li>
-          <li onClick={()=>{
-            router.replace('/contact')
-          }} className={classes.items}>Contact</li>
-          <li onClick={()=>{
-            router.replace('/competitions')
-          }} className={classes.register}>
-            {" "}
-            <span>COMPETITIONS</span>{" "}
-          </li>
-        </ul>
-        <img onClick={()=>{setnavVisible(true)}} className={classes.hamburger} style={{width:'30px', height:'30px'}} src='/images/hamburger.png' />
-        {/* <Hamburger/> */}
-      </div>
-      <Modal
-        centered
-        footer={null}
-        visible={navVisible}
-        className={classes.nav_modal}
-        onOk={() => setnavVisible(false)}
-        onCancel={() => setnavVisible(false)}
-        width={1000}
-      >
-          <div className={classes.modalnav}>
-          <p onClick={()=>{
-            router.replace('/')
-          }} className={classes.modal_item}>Home</p>
-          <p onClick={()=>{
-            router.replace('/about')
-          }} className={classes.modal_item}>About</p>
-          <p onClick={()=>{
-            router.replace('/contact')
-          }} className={classes.modal_item}>Contact</p>
-          <p onClick={()=>{
-            router.replace('/competitions')
-          }} className={classes.register}>
-            {" "}
-            <span>COMPETITIONS</span>{" "}
-          </p>
-        </div>
-      </Modal>
+  
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding:"0 20px" }}>
         <Title style={{ color: "white", fontSize: "40px", margin: "20px auto" ,textTransform:'uppercase' }}>
           Event Details
@@ -469,7 +418,6 @@ function CompetitionDetails() {
             </Form>
           )}
       </Modal>
-      <Footer />
     </div>
   );
 }

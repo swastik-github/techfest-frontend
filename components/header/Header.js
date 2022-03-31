@@ -57,15 +57,7 @@ export default function Header() {
           </p>
         </div>
       </Modal>
-      <div className={classes.container02}>
-        <h1>
-          Tech Fest <span> 2022-23</span>{" "}
-        </h1>
-      </div>
-      <Slider />
-      <div className={classes.sponsors}>
-        <h1>Title Sponsors</h1>
-      </div>
+     
     </div>
   );
 }

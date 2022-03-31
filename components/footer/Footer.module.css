@@ -2,16 +2,16 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding: 50px 10rem;
-  position: relative;
+  padding: 40px 10rem;
+  align-items: center;
   gap: 20px;
   flex-wrap: wrap;
   width: 100%;
-  /* margin-top: 5rem; */
+  margin-top: auto;
   background: linear-gradient(to right, #192b53, #5c4176);
   color: white;
-  height: 250px;
-  margin-top: 200px;
+  height: fit-content;
+
 }
 .box1,
 .box2,
@@ -20,9 +20,6 @@
   flex-direction: column;
   align-items: center;
 }
-
-
-
 
 .box2 span,
 .box1 span {
@@ -42,48 +39,31 @@
 .socialMedia {
   display: flex;
   flex-direction: row;
+  gap: 10px;
   align-items: center;
 }
-.socialMedia img {
-  width: 43px;
-  height: 43px;
-  display: flex;
-  margin-left: 10px;
-  margin-top: 25px;
-}
+
 @media screen and (max-width: 1000px) {
   .container {
     padding: 50px 10vw;
   }
 }
 @media screen and (max-width: 790px) {
-  .container {
-    position: relative;
-
-    height: fit-content;
-    /* margin-top: 6rem; */
-  }
+  
   .box2 span,
   .box1 span {
     font-size: 16px;
   }
   .box3 .span {
-   font-size: 16px;
+    font-size: 16px;
   }
-
 }
 @media screen and (max-width: 500px) {
   .container {
     padding: 50px 10vw;
     height: fit-content;
   }
-  .socialMedia img {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    margin-left: 10px;
-    margin-top: 25px;
-  }
+
 }
 @media (min-width: 638px) and (max-width: 790px) {
   /* .container {

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Card, Divider, Modal } from "antd";
-import Footer from "../../../components/footer/Footer";
 import eventData from "../../../utilites/eventsdata";
 import classes from "./eventlist.module.css";
-import {useAppContext} from "../../../context/state";
+import { useAppContext } from "../../../context/state";
 function CompetitionDetails() {
   const router = useRouter();
   const { id } = router.query;
-  const [visible, setVisible] = useState(false);
   let filteredEventData;
   const [eventList, seteventList] = useState([]);
   const value = useAppContext();
@@ -25,56 +23,6 @@ function CompetitionDetails() {
 
   return (
     <div className={classes.container} style={{ textAlign: "center" }}>
-      <div className={classes.navbar}>
-        <img onClick={()=>{router.replace('/')}} src={"/images/logo.png"} className={classes.logo} alt="" />
-
-        <ul className={classes.navitems}>
-          <li onClick={()=>{
-            router.replace('/')
-          }} className={classes.items}>Home</li>
-          <li onClick={()=>{
-            router.replace('/about')
-          }} className={classes.items}>About</li>
-          <li onClick={()=>{
-            router.replace('contact')
-          }} className={classes.items}>Contact</li>
-          <li onClick={()=>{
-            router.replace('/competitions')
-          }} className={classes.register}>
-            {" "}
-            <span>COMPETITIONS</span>{" "}
-          </li>
-        </ul>
-        <img onClick={()=>{setVisible(true)}} className={classes.hamburger} style={{width:'30px', height:'30px'}} src='/images/hamburger.png' />
-        {/* <Hamburger/> */}
-      </div>
-      <Modal
-        centered
-        footer={null}
-        visible={visible}
-        className={classes.nav_modal}
-        onOk={() => setVisible(false)}
-        onCancel={() => setVisible(false)}
-        width={1000}
-      >
-          <div className={classes.modalnav}>
-          <p onClick={()=>{
-            router.replace('/')
-          }} className={classes.modal_item}>Home</p>
-          <p onClick={()=>{
-            router.replace('/about')
-          }} className={classes.modal_item}>About</p>
-          <p onClick={()=>{
-            router.replace('/contact')
-          }} className={classes.modal_item}>Contact</p>
-          <p onClick={()=>{
-            router.replace('/competitons')
-          }} className={classes.register}>
-            {" "}
-            <span>COMPETITIONS</span>{" "}
-          </p>
-        </div>
-      </Modal>
       <h1
         style={{ color: "white", textTransform: "uppercase", fontSize: "40px" }}
       >
@@ -117,7 +65,7 @@ function CompetitionDetails() {
                 <div style={{ cursor: "pointer" }} className={classes.explore}>
                   <div
                     onClick={() => {
-                      setisRegisterVisible(true)
+                      setisRegisterVisible(true);
                       router.push(
                         `/competitions/[id]/[event]`,
                         `/competitions/${id}/${item._id}`
@@ -133,7 +81,7 @@ function CompetitionDetails() {
                     <p>register</p>
                   </div>
                   <div
-                  className={classes.explore_btn}
+                    className={classes.explore_btn}
                     style={{
                       width: "100%",
                       height: "40px",
@@ -153,8 +101,6 @@ function CompetitionDetails() {
             );
           })}
       </div>
-      <Footer />
-      
     </div>
   );
 }
