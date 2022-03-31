@@ -4,7 +4,7 @@
   justify-content: space-around;
   padding: 50px 10rem;
   position: relative;
-  align-items: center;
+  gap: 20px;
   flex-wrap: wrap;
   width: 100%;
   /* margin-top: 5rem; */
@@ -21,9 +21,13 @@
   align-items: center;
 }
 
+
+
+
 .box2 span,
 .box1 span {
   font-size: 30px;
+  line-height: 40px;
 }
 .box3 .span {
   display: flex;
@@ -55,15 +59,30 @@
 @media screen and (max-width: 790px) {
   .container {
     position: relative;
-   
-    height: 400px;
+
+    height: fit-content;
     /* margin-top: 6rem; */
   }
+  .box2 span,
+  .box1 span {
+    font-size: 16px;
+  }
+  .box3 .span {
+   font-size: 16px;
+  }
+
 }
 @media screen and (max-width: 500px) {
   .container {
     padding: 50px 10vw;
-    height: 600px;
+    height: fit-content;
+  }
+  .socialMedia img {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    margin-left: 10px;
+    margin-top: 25px;
   }
 }
 @media (min-width: 638px) and (max-width: 790px) {
