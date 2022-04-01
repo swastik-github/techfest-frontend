@@ -13,6 +13,9 @@
   height: fit-content;
 
 }
+.box1 p{
+  cursor: pointer;
+}
 .box1,
 .box2,
 .box3 {

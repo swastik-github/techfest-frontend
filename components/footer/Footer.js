@@ -24,10 +24,10 @@ const Footer = () => {
         </p>
         <p
           onClick={() => {
-            router.replace("/contact");
+            router.replace("/contributers");
           }}
         >
-          contact
+          contributer
         </p>
       </div>
       <div className={classes.box2}>

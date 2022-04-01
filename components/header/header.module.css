@@ -53,18 +53,30 @@
   margin-left: 10px;
 }
 .register {
-  width: 9rem;
-  height: 33px;
+  padding: 10px;
   cursor: pointer !important;
   background-color: #94008eb5;
   display: flex;
+  font-size: 16px;
+  position: relative;
   align-items: center;
   justify-content: center;
-  border-radius: 20px;
+  border-radius: 10px;
+}
+.modal_item{
+  color: black;
+  text-decoration:underline;
+  font-size: 16px;
+}
+.modal_item:active{
+  font-weight: 500;
+}
+.register:active{
+  top: 2px;
 }
 .register span {
   color: white;
-  font-weight: 900;
+  font-weight: 800;
 }
 .container03 {
   width: 50rem;
@@ -87,10 +99,7 @@
   flex-direction: column;
   align-items: center;
 }
-.modal_item{
-  color: black;
-  font-size: 32px;
-}
+
 
 .hamburger{
   display: none;
@@ -103,7 +112,7 @@
     display: block;
     margin-right: 10vw;
   }
- 
+
   .container .logo{
     margin-left: 10vw;
     width: 8rem;
