@@ -11,7 +11,7 @@ export default function Home() {
         </h1>
       </div>
       <Slider />
-      <div className={classes.sponsors}>
+      <div style={{marginBottom:'150px'}} className={classes.sponsors}>
         <h1>Title Sponsors</h1>
       </div>
     </div>

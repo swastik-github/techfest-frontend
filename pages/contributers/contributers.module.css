@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    margin-bottom: 60px !important;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+}
+.contact_container{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.contact_card{
+    display: flex;
+    padding: 20px 25px;
+    width: 250px;
+    height: 350px;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+    border: 1px solid purple;
+    border-radius: 15px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
