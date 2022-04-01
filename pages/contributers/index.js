@@ -6,40 +6,46 @@ import { PhoneOutlined, LinkedinOutlined } from "@ant-design/icons";
 function Contributers() {
   return (
     <div className={classes.container}>
-      <h1>THE TEAM</h1>
-      <div className={classes.contact_container}>
-        {contributersData.map((item) => {
-          return (
-            <div className={classes.contact_card}>
-              <Avatar style={{width:"100px", height:"100px"}} src={item.avatar} />
-              <h3 style={{color:"white", margin:"30px 0 10px"}}>{item.name}</h3>
-              <p>{item.role}</p>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <p>{item.contact.email}</p>
-                {/* <p>
+      <h1 style={{ color: "white", fontSize: "46px" }}>THE TEAM</h1>
+
+        <div className={classes.contact_container}>
+          {contributersData.map((item) => {
+            return (
+              <div className={classes.contact_card}>
+                <Avatar
+                  style={{ width: "100px", height: "100px" }}
+                  src={item.avatar}
+                />
+                <h3 style={{ color: "white", margin: "30px 0 10px" }}>
+                  {item.name}
+                </h3>
+                <p>{item.role}</p>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <p>{item.contact.email}</p>
+                  {/* <p>
                   {" "}
                   <PhoneOutlined /> {item.contact.phone_no}
                 </p> */}
-                <a
-                  href={item.contact.linkedin.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <p>
-                    <LinkedinOutlined /> {item.contact.linkedin.username}
-                  </p>
-                </a>
+                  <a
+                    href={item.contact.linkedin.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <p>
+                      <LinkedinOutlined /> {item.contact.linkedin.username}
+                    </p>
+                  </a>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
     </div>
   );
 }

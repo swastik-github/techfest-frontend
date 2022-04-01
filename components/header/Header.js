@@ -19,8 +19,8 @@ export default function Header() {
             router.replace('/about')
           }} className={classes.items}>About</li>
           <li onClick={()=>{
-            router.replace('/contact')
-          }} className={classes.items}>Contact</li>
+            router.replace('/contributers')
+          }} className={classes.items}>Contributers</li>
           <li onClick={()=>{
             router.replace('/competitions')
           }} className={classes.register}>

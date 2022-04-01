@@ -4,11 +4,14 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
+    text-align: center;
     margin: 0 auto;
 }
 .contact_container{
     display: flex;
     gap: 20px;
+    margin: 40px 0 0;
+    width: 100%;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
