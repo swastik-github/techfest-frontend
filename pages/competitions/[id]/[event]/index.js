@@ -79,7 +79,7 @@ function CompetitionDetails() {
       if (filterdEventsDetails.length == 0) {
         router.push('/404');
       }
-      seteventDetails(filterdEventsDetails[0]);
+      seteventDetails(filterdEventsDetails?.[0]);
     }
   }, [router.isReady]);
 
@@ -148,6 +148,7 @@ function CompetitionDetails() {
           setPaymentDetails(error.response);
           setIsPaymentDone(true);
           handleApiError(error.response);
+          return;
         }
         setPaymentDetails(result.data);
         setIsPaymentDone(true);
