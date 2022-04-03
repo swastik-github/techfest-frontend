@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
 
 html,
 body {
@@ -7,7 +7,7 @@ body {
   box-sizing: border-box;
   /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
-    font-family: 'Open Sans', sans-serif !important;
+  font-family: "Open Sans", sans-serif !important;
 }
 .body-container {
   width: 100%;
@@ -17,7 +17,7 @@ body {
   overflow: hidden;
   min-height: 100vh;
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
   background-repeat: no-repeat;
 }
 
@@ -37,7 +37,7 @@ li {
   box-sizing: border-box;
 }
 /* Event List css */
-.ant-card{
+.ant-card {
   background: none !important;
 }
 .ant-card-body {
@@ -48,29 +48,53 @@ li {
   color: white;
 }
 /*registration form*/
-.registration_form{
-  background-color:rgb(34, 34, 34);
-  
+/* .registration_form {
+  background-color: rgb(34, 34, 34);
 }
-.registration_modal .ant-modal-header{
+.registration_modal .ant-modal-header {
   background-color: black;
-  
+
   border: none !important;
 }
-.registration_modal .ant-modal-header .ant-modal-title{
+.registration_modal .ant-modal-header .ant-modal-title {
   color: white !important;
 }
-.registration_modal > .ant-modal-content > .ant-modal-close{
+.registration_modal > .ant-modal-content > .ant-modal-close {
   color: white !important;
 }
-.ant-input{
+.registration_form
+  > .ant-form-item
+  > .ant-form-item-control
+  .ant-form-item-control-input
+  .ant-input {
   color: white !important;
   border: 0.5px solid black !important;
-  background-color:black !important;
+  background-color: black !important;
 }
-.registration_form > .ant-select-selection-placeholder {
-  color: #f0f0f0;
+.registration_form
+  > .ant-form-item
+  > .ant-form-item-control
+  .ant-form-item-control-input
+  .ant-select
+  .ant-select-selector {
+  color: white !important;
+  border: 0.5px solid black !important;
+  background-color: black !important;
 }
-.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+.ant-dropdown {
+  background-color: gray !important;
+  color: white !important;
+}
+
+.ant-select-arrow {
+  color: white !important;
+}
+.ant-form-item-label
+  > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
   color: purple !important;
 }
+.ant-input-group-addon {
+  border: none !important;
+  color: white !important;
+  background-color: black !important;
+} */

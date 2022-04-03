@@ -302,7 +302,7 @@ function CompetitionDetails() {
         title="Registration"
         centered
         className="registration_modal"
-        bodyStyle={{ backgroundColor: "rgb(34, 34, 34)" }}
+        // bodyStyle={{ backgroundColor: "rgb(34, 34, 34)" }}
         footer={null}
         visible={visible}
         onOk={() => setVisible(false)}
@@ -324,7 +324,7 @@ function CompetitionDetails() {
           >
             <Form.Item
               name="email"
-              label={<label style={{ color: "white" }}>E-mail</label>}
+              label={<label style={{}}>E-mail</label>}
               rules={[
                 {
                   type: "email",
@@ -341,7 +341,7 @@ function CompetitionDetails() {
 
             <Form.Item
               name="first_name"
-              label={<label style={{ color: "white" }}>First Name</label>}
+              label={<label style={{}}>First Name</label>}
               tooltip="What do you want others to call you?"
               rules={[
                 {
@@ -355,7 +355,7 @@ function CompetitionDetails() {
             </Form.Item>
             <Form.Item
               name="last_name"
-              label={<label style={{ color: "white" }}>Last Name</label>}
+              label={<label style={{}}>Last Name</label>}
               tooltip="What do you want others to call you?"
               rules={[
                 {
@@ -384,9 +384,7 @@ function CompetitionDetails() {
 
             <Form.Item
               name="enrollment_number"
-              label={
-                <label style={{ color: "white" }}>Enrollment number</label>
-              }
+              label={<label style={{}}>Enrollment number</label>}
               tooltip="your college name"
               rules={[
                 {
@@ -400,7 +398,7 @@ function CompetitionDetails() {
             </Form.Item>
             <Form.Item
               name="institution_type"
-              label={<label style={{ color: "white" }}>Institution Type</label>}
+              label={<label style={{}}>Institution Type</label>}
               tooltip="your college name"
               rules={[
                 {
@@ -410,7 +408,10 @@ function CompetitionDetails() {
                 },
               ]}
             >
-              <Select placeholder="select your gender">
+              <Select
+                // dropdownClassName="ant-dropdown"
+                placeholder="select your gender"
+              >
                 <Option value="College">College</Option>
                 <Option value="School">School</Option>
               </Select>
@@ -418,7 +419,7 @@ function CompetitionDetails() {
 
             <Form.Item
               name="phone"
-              label={<label style={{ color: "white" }}>Phone Number</label>}
+              label={<label style={{}}>Phone Number</label>}
               rules={[
                 {
                   required: true,
@@ -427,14 +428,14 @@ function CompetitionDetails() {
               ]}
             >
               <Input
-                addonBefore={<p style={{ color: "black" }}>+91</p>}
+                addonBefore={<p style={{ color: "black", margin: "0" }}>+91</p>}
                 style={{ width: "100%" }}
               />
             </Form.Item>
 
             <Form.Item
               name="age"
-              label={<label style={{ color: "white" }}>Age</label>}
+              label={<label style={{}}>Age</label>}
               rules={[
                 {
                   required: true,
@@ -458,10 +459,13 @@ function CompetitionDetails() {
 
             <Form.Item
               name="gender"
-              label={<label style={{ color: "white" }}>gender</label>}
+              label={<label style={{}}>gender</label>}
               rules={[{ required: true, message: "Please select gender!" }]}
             >
-              <Select placeholder="select your gender">
+              <Select
+                // dropdownClassName="ant-dropdown"
+                placeholder="select your gender"
+              >
                 <Option value="male">Male</Option>
                 <Option value="female">Female</Option>
                 <Option value="other">Other</Option>
