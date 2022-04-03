@@ -1,8 +1,6 @@
 .container {
   width: 100%;
   text-align: center;
-  
-  
 }
 
 .cardBtn {
@@ -42,7 +40,7 @@
   text-align: start;
   font-size: 16px;
   transition: ease-in-out 0.3s;
- 
+
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
 }
 
@@ -103,48 +101,7 @@
 .headLine:hover .descriptions {
   display: -webkit-box;
 }
-/* .headLine:hover ~ .blurBackground {
-  backdrop-filter: blur(4px);
-} */
 
-/* navbar css */
-.navbar {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0  20px 0 0;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.navitems {
-  display: flex;
-  flex-direction: row;
-  float: right;
-  align-items: center;
-  margin-top: 50px;
-  margin-right: 60px;
-  justify-content: space-between;
-}
-.navitems .items {
-  list-style: none;
-  margin-right: 24px;
-  cursor: pointer !important;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-.container .logo {
-  width: 11rem;
-  left: 70px;
-  margin-top: 8px;
-  margin-left: 40px;
-}
 .register {
   width: 9rem;
   cursor: pointer !important;
@@ -161,12 +118,10 @@
 }
 .register_btn {
   background-color: #7500b8;
- 
 }
 .register_btn:hover {
   background-color: #b84af8b9;
 }
-
 
 .explore_btn {
   background-color: rgba(128, 128, 128, 0.678);
@@ -174,37 +129,4 @@
 }
 .explore_btn:hover {
   background-color: gray;
-}
-.hamburger{
-  display: none;
-}
-.modalnav{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.modal_item{
-  color: black;
-  font-size: 32px;
-}
-
-.eventdetail_container{
-  display: flex;
-}
-.eventdetail_headlines span{
-  color: white !important;
-}
-@media screen and (max-width: 790px) {
-  .navitems{
-    display: none;
-  }
-  .hamburger{
-    display: block;
-    margin-right: 5vw;
-  }
- 
-  .container .logo{
-    margin-left: 5vw;
-    width: 8rem;
-  }
 }

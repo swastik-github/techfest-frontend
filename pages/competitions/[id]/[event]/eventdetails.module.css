@@ -29,7 +29,6 @@
   margin-right: 60px;
   justify-content: space-between;
 }
-
 .modal_item {
   cursor: pointer !important;
   color: black;
@@ -120,7 +119,7 @@
     width: 90%;
   }
   .img_container img {
-    width: 90%;
+    width: 80%;
     height: 400px;
   }
 }

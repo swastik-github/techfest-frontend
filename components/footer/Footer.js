@@ -1,45 +1,43 @@
-import { useRouter } from "next/router";
-import React from "react";
-import classes from "./Footer.module.css";
-import Image from "next/image";
+import { useRouter } from 'next/router';
+import React from 'react';
+import classes from './Footer.module.css';
+import Image from 'next/image';
 const Footer = () => {
   const router = useRouter();
   return (
     <div className={classes.container}>
-      <div className={classes.box1}>
-        <span>Quick Link</span>
-        <p
+      <div className={classes.box}>
+        <h3>Quick Link</h3>
+        <a
           onClick={() => {
-            router.replace("/");
+            router.replace('/');
           }}
         >
-          home
-        </p>
-        <p
+          Home
+        </a>
+        <a
           onClick={() => {
-            router.replace("/about");
+            router.replace('/about');
           }}
         >
-          about
-        </p>
-        <p
+          About
+        </a>
+        <a
           onClick={() => {
-            router.replace("/contributers");
+            router.replace('/contributers');
           }}
         >
-          contributer
-        </p>
+          Contributer
+        </a>
       </div>
-      <div className={classes.box2}>
-        <span>Our Team</span>
+      <div className={classes.box}>
+        <h3>Our Team</h3>
         <p>Oriental College of Technology</p>
         <p>oistbpl@oriental.ac.in</p>
         <p>0755-2529026</p>
       </div>
-      <div className={classes.box3}>
-        <span style={{ marginBottom: "10px" }} className={classes.span}>
-          Contact Us
-        </span>
+      <div className={classes.box}>
+        <h3>Contact Us</h3>
         <div className={classes.socialMedia}>
           <a
             href="https://www.instagram.com/techfizz2022"
@@ -49,7 +47,7 @@ const Footer = () => {
             <Image
               width={43}
               height={43}
-              src={"/images/instagram.png"}
+              src={'/images/instagram.png'}
               alt=""
             />
           </a>
@@ -58,17 +56,17 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image width={43} height={43} src={"/images/facebook.png"} alt="" />
+            <Image width={43} height={43} src={'/images/facebook.png'} alt="" />
           </a>
           <a href="" target="_blank" rel="noopener noreferrer">
-            <Image width={43} height={43} src={"/images/twitter.png"} alt="" />
+            <Image width={43} height={43} src={'/images/twitter.png'} alt="" />
           </a>
           <a
             href="https://www.youtube.com/watch?v=Y1xGqD_icBY"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image width={43} height={43} src={"/images/youtube.png"} alt="" />
+            <Image width={43} height={43} src={'/images/youtube.png'} alt="" />
           </a>
         </div>
       </div>

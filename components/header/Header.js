@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import classes from "./header.module.css";
-import { Modal } from "antd";
-import Slider from "../slider/Slider";
-import { useRouter } from "next/router";
+import React, { useState } from 'react';
+import classes from './header.module.css';
+import { Modal } from 'antd';
+import { useRouter } from 'next/router';
 export default function Header() {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
@@ -10,11 +9,11 @@ export default function Header() {
     <div className={classes.container}>
       <div className={classes.navbar}>
         <img
-          style={{ cursor: "pointer" }}
+          style={{ cursor: 'pointer' }}
           onClick={() => {
-            router.replace("/");
+            router.replace('/');
           }}
-          src={"/images/logo.png"}
+          src={'/images/logo.png'}
           className={classes.logo}
           alt=""
         />
@@ -22,7 +21,7 @@ export default function Header() {
         <ul className={classes.navitems}>
           <li
             onClick={() => {
-              router.replace("/");
+              router.replace('/');
             }}
             className={classes.items}
           >
@@ -30,7 +29,7 @@ export default function Header() {
           </li>
           <li
             onClick={() => {
-              router.replace("/about");
+              router.replace('/about');
             }}
             className={classes.items}
           >
@@ -38,7 +37,7 @@ export default function Header() {
           </li>
           <li
             onClick={() => {
-              router.replace("/contributers");
+              router.replace('/contributers');
             }}
             className={classes.items}
           >
@@ -46,7 +45,7 @@ export default function Header() {
           </li>
           <li
             onClick={() => {
-              router.replace("/my-events");
+              router.replace('/my-events');
             }}
             className={classes.items}
           >
@@ -54,12 +53,12 @@ export default function Header() {
           </li>
           <li
             onClick={() => {
-              router.replace("/competitions");
+              router.replace('/competitions');
             }}
             className={classes.register}
           >
-            {" "}
-            <span>COMPETITIONS</span>{" "}
+            {' '}
+            <span>COMPETITIONS</span>{' '}
           </li>
         </ul>
         <img
@@ -67,7 +66,6 @@ export default function Header() {
             setVisible(true);
           }}
           className={classes.hamburger}
-          style={{ width: "30px", height: "30px" }}
           src="/images/hamburger.png"
         />
       </div>
@@ -83,8 +81,8 @@ export default function Header() {
         <div className={classes.modalnav}>
           <p
             onClick={() => {
-              router.replace("/");
-              setVisible(false)
+              router.replace('/');
+              setVisible(false);
             }}
             className={classes.modal_item}
           >
@@ -92,8 +90,8 @@ export default function Header() {
           </p>
           <p
             onClick={() => {
-              router.replace("/about");
-              setVisible(false)
+              router.replace('/about');
+              setVisible(false);
             }}
             className={classes.modal_item}
           >
@@ -101,8 +99,8 @@ export default function Header() {
           </p>
           <p
             onClick={() => {
-              router.replace("/contributers");
-              setVisible(false)
+              router.replace('/contributers');
+              setVisible(false);
             }}
             className={classes.modal_item}
           >
@@ -110,13 +108,13 @@ export default function Header() {
           </p>
           <p
             onClick={() => {
-              router.replace("/competitions");
-              setVisible(false)
+              router.replace('/competitions');
+              setVisible(false);
             }}
             className={classes.register}
           >
-            {" "}
-            <span>COMPETITIONS</span>{" "}
+            {' '}
+            <span>COMPETITIONS</span>{' '}
           </p>
         </div>
       </Modal>

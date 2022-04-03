@@ -65,20 +65,15 @@
   background-position: center;
 }
 @media screen and (max-width: 700px) {
-
-  .slider{
+  .slider {
     width: 80%;
   }
-  .slide{
+  .slide {
     height: 30vh;
-  }  
- 
+  }
 }
 @media screen and (max-width: 500px) {
-
-
-  .slide{
+  .slide {
     height: 20vh;
-  }  
- 
+  }
 }
