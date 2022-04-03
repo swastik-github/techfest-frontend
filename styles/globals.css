@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
 
 html,
 body {
@@ -71,15 +71,46 @@ li {
 .registration_modal > .ant-modal-content > .ant-modal-close {
   color: white !important;
 }
+<<<<<<< HEAD
 .ant-input {
+=======
+.registration_form
+  > .ant-form-item
+  > .ant-form-item-control
+  .ant-form-item-control-input
+  .ant-input {
   color: white !important;
   border: 0.5px solid black !important;
   background-color: black !important;
 }
-.registration_form > .ant-select-selection-placeholder {
-  color: #f0f0f0;
+.registration_form
+  > .ant-form-item
+  > .ant-form-item-control
+  .ant-form-item-control-input
+  .ant-select
+  .ant-select-selector {
+>>>>>>> 9bf42d48ab3f006080188176ab60ac021c5e2152
+  color: white !important;
+  border: 0.5px solid black !important;
+  background-color: black !important;
 }
+.ant-dropdown {
+  background-color: gray !important;
+  color: white !important;
+}
+<<<<<<< HEAD
+=======
+
+.ant-select-arrow {
+  color: white !important;
+}
+>>>>>>> 9bf42d48ab3f006080188176ab60ac021c5e2152
 .ant-form-item-label
   > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
   color: purple !important;
 }
+.ant-input-group-addon {
+  border: none !important;
+  color: white !important;
+  background-color: black !important;
+} */
