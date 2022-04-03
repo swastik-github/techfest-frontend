@@ -1,3 +1,19 @@
-.container {
+/* .container {
   min-width: 85vh;
-}
+} */
+/* @media screen {
+  @media screen and (max-width: 450px) {
+    .cardss {
+      width: 300px;
+      height: 200px;
+    }
+    .cardss img {
+      width: 300px;
+      height: 200px;
+      border-radius: 12px;
+    }
+    .headLine > h3 {
+      font-size: 1.2rem;
+    }
+  }
+} */
