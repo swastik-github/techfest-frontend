@@ -25,7 +25,7 @@
   justify-content: center;
   gap: 60px 40px;
   flex-wrap: wrap;
-  padding: 10px 60px 60px;
+  padding: 10px 20px 60px;
 }
 
 .headLine {
@@ -188,8 +188,12 @@
   font-size: 32px;
 }
 
-
-
+.eventdetail_container{
+  display: flex;
+}
+.eventdetail_headlines span{
+  color: white !important;
+}
 @media screen and (max-width: 790px) {
   .navitems{
     display: none;

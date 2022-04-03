@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-around;
   padding: 40px 10rem;
-  align-items: center;
+  align-items:flex-start ;
   gap: 20px;
   flex-wrap: wrap;
   width: 100%;

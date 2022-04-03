@@ -3,6 +3,7 @@
 }
 .container_box {
   display: flex;
+  margin-top: 100px;
   justify-content: center;
   gap: 20px;
 }
@@ -28,33 +29,8 @@
   margin-right: 60px;
   justify-content: space-between;
 }
-.navitems .items {
-  list-style: none;
-  cursor: pointer !important;
-  margin-right: 24px;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
 
-.container .logo {
-  width: 11rem;
-  left: 70px;
-  margin-top: 8px;
-  margin-left: 40px;
-}
-.hamburger{
-  display: none;
-}
-.modalnav{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.modal_item{
+.modal_item {
   cursor: pointer !important;
   color: black;
   font-size: 32px;
@@ -73,30 +49,78 @@
   color: white;
   font-weight: 900;
 }
-
-@media screen and (max-width: 790px) {
-  .navitems{
-    display: none;
-  }
-  .hamburger{
-    display: block;
-    margin-right: 5vw;
-  }
- .event_img{
-   width: 300px !important;
- }
-  .container .logo{
-    margin-left: 5vw;
-    width: 8rem;
-  }
+.eventdetail_container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.eventdetail_headlines {
+  padding: 5px 100px 5px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 0.5px solid white !important;
+  border-radius: 5px !important;
+  backdrop-filter: blur(5px);
+  display: flex;
+  gap: 20px;
+}
+.eventdetails_details {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 0.5px solid white !important;
+  height: 250px;
+  border-radius: 5px !important;
+  overflow: scroll;
+  backdrop-filter: blur(5px);
+  transition: step-start 2s;
+}
+.eventdetail_headlines span {
+  color: #ebe0e0;
+  font-size: 16px;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 700px) {
   .container_box {
     flex-direction: column;
+    margin: 50px 5px;
+  }
+  .eventdetail_container {
+    width: 100%;
+  }
+  .eventdetails_details {
+    height: 300px;
+  }
+  .eventdetail_headlines {
+    padding: 5px;
+    gap: 0px;
+    justify-content: space-around;
+  }
+  .img_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .img_container button {
+    width: 300px;
   }
   .img_container img {
-    width: 80%;
-    
+    width: 300px;
+    height: 400px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .img_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .img_container button {
+    width: 90%;
+  }
+  .img_container img {
+    width: 90%;
+    height: 400px;
   }
 }
