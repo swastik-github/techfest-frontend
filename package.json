@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "antd": "^4.19.4",
+    "aos": "^3.0.0-beta.6",
     "axios": "^0.26.1",
     "clsx": "^1.1.1",
     "next": "^12.1.1",
+    "razorpay": "^2.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-responsive-carousel": "^3.2.23"

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Card, Divider, Modal } from "antd";
-import eventData from "../../../utilites/eventsdata";
 import classes from "./eventlist.module.css";
 import { useAppContext } from "../../../context/state";
 function CompetitionDetails() {
@@ -10,14 +9,14 @@ function CompetitionDetails() {
   let filteredEventData;
   const [eventList, seteventList] = useState([]);
   const value = useAppContext();
-  let { setisRegisterVisible } = value.state;
+  let { setisRegisterVisible, eventList: eventData } = value.state;
   useEffect(() => {
     if (router.isReady) {
-      //   const response = await axios(`http://localhost:1000/competitions/${id}`);
       filteredEventData = eventData.filter((item) => {
-        return item.event_type == id;
+        return item.competition_genre == id;
       });
-      seteventList(filteredEventData);
+      console.log(filteredEventData[0], "filterdevents");
+      seteventList(filteredEventData[0]);
     }
   }, [router.isReady]);
 
@@ -26,11 +25,11 @@ function CompetitionDetails() {
       <h1
         style={{ color: "white", textTransform: "uppercase", fontSize: "40px" }}
       >
-        {router.query.id} Events
+       {eventList.name}
       </h1>
       <div className={classes.event_list}>
         {eventList &&
-          eventList.map((item) => {
+          eventList?.events?.map((item) => {
             return (
               <Card
                 className={"event_cards"}
@@ -53,12 +52,12 @@ function CompetitionDetails() {
                 <div className={classes.blurBackground}></div>
 
                 <div style={{ padding: "10px" }} className={classes.headLine}>
-                  <h3> {item.title} </h3>
+                  <h3> {item.event_name} </h3>
                   <p
                     className={classes.descriptions}
                     style={{ fontSize: "14px", textTransform: "lowercase" }}
                   >
-                    {item.descriptions}
+                    {item.event_description}
                   </p>
                 </div>
 
@@ -68,7 +67,7 @@ function CompetitionDetails() {
                       setisRegisterVisible(true);
                       router.push(
                         `/competitions/[id]/[event]`,
-                        `/competitions/${id}/${item._id}`
+                        `/competitions/${id}/${item.event_id}`
                       );
                     }}
                     className={classes.register_btn}
@@ -90,7 +89,7 @@ function CompetitionDetails() {
                     onClick={() => {
                       router.push(
                         `/competitions/[id]/[event]`,
-                        `/competitions/${id}/${item._id}`
+                        `/competitions/${id}/${item.event_id}`
                       );
                     }}
                   >

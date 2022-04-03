@@ -2,18 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import classes from "./eventdetails.module.css";
 import { Button, Image, Modal, Typography } from "antd";
-import {useAppContext} from '../../../../context/state'
-import {
-  Form,
-  Input,
-  InputNumber,
-  Select,
-
-  Checkbox,
-
-} from "antd";
-
-import eventsdata from "../../../../utilites/eventsdata";
+import { useAppContext } from "../../../../context/state";
+import { Form, Input, InputNumber, Select, Checkbox } from "antd";
+import axios from "axios";
 const { Option } = Select;
 const { Title, Text } = Typography;
 const formItemLayout = {
@@ -40,42 +31,43 @@ const tailFormItemLayout = {
 };
 function CompetitionDetails() {
   const router = useRouter();
-  const { event } = router.query;
+  const { event, id } = router.query;
   const value = useAppContext();
-  let { isRegisterVisible, setisRegisterVisible } = value.state;
-  const initalRegisterValue = isRegisterVisible
+  let { isRegisterVisible, setisRegisterVisible, eventList } = value.state;
+
+  const initalRegisterValue = isRegisterVisible;
   const [eventDetails, seteventDetails] = useState({});
+  const [activeDetails, setActiveDetails] = useState("about");
   const [visible, setVisible] = useState(initalRegisterValue);
-  const [otpVerify, setOtpVerify] = useState({
-    otp: null,
-    verifed: false,
-    phone_no: null,
-  });
 
   useEffect(() => {
-    setisRegisterVisible(false)
-  }, [])
-  
-  let filteredEventData;
+    setisRegisterVisible(false);
+  }, []);
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
   useEffect(async () => {
     if (router.isReady) {
-      //   const response = await axios(`http://localhost:1000/events/`);
-      filteredEventData = eventsdata.filter((item) => {
-        return item._id == event;
+      let filterdEvents = eventList.filter((item) => {
+        return item.competition_genre == id;
       });
-      seteventDetails(filteredEventData[0]);
-      console.log(filteredEventData);
+      let filterdEventsDetails = filterdEvents[0]?.events?.filter((item) => {
+        return item.event_id == event;
+      });
+      seteventDetails(filterdEventsDetails[0]);
+      console.log(filterdEventsDetails[0], "event details");
     }
   }, [router.isReady]);
-  function otpVerification() {
-    let v = 2342;
-
-    if (v == otpVerify.value) {
-      setOtpVerify((prv) => {
-        return { ...prv, verifed: true };
-      });
-    }
-  }
 
   let options = {
     weekday: "long",
@@ -85,338 +77,423 @@ function CompetitionDetails() {
   };
 
   const [form] = Form.useForm();
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("Received values of form: ", values);
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+    console.log(res, "load script");
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    // creating a new order
+    const result = await axios.post(
+      `http://localhost:8000/v1/events/register/${id}/${event}`,
+      values
+    );
+
+    if (!result) {
+      alert("Server error. Are you online?");
+      return;
+    }
+    console.log(result);
+    const { amount, id: order_id, currency } = result.data.rzp;
+
+    const options = {
+      key: "rzp_test_nfw7iyeLH8zYuW", // Enter the Key ID generated from the Dashboard
+      amount: amount.toString(),
+      currency: currency,
+      name: "TechFizz",
+      description: eventDetails.event_name,
+      // image: { logo },
+      order_id: order_id,
+      handler: async function (response) {
+        const data = {
+          order_id,
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_signature: response.razorpay_signature,
+        };
+        console.log(response);
+        console.log(data);
+
+        const result = await axios.post(
+          "http://localhost:8000/v1/events/payment",
+          data
+        );
+
+        console.log(result);
+        // alert(result.data.msg);
+      },
+      prefill: {
+        name: values.first_name + " " + values.last_name,
+        email: values.email,
+        contact: values.phone,
+      },
+      theme: {
+        color: "#61dafb",
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
     form.resetFields();
   };
 
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option value="86">+91</Option>
-      </Select>
-    </Form.Item>
-  );
+  // const prefixSelector = (
+  //   <Form.Item name="prefix" noStyle>
+  //     <Select style={{ width: 70 }}>
+  //       <Option value="86"></Option>
+  //     </Select>
+  //   </Form.Item>
+  // );
 
   return (
-    <div className={classes.container} style={{ textAlign: "center" }}>
-  
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding:"0 20px" }}>
-        <Title style={{ color: "white", fontSize: "40px", margin: "20px auto" ,textTransform:'uppercase' }}>
-          Event Details
-        </Title>
+    <div className={classes.container}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
         <div className={classes.container_box}>
-          <div className={classes.img_container} >
-            <Image className={classes.event_img}  src="https://picsum.photos/300/400" />
+          <div className={classes.img_container}>
+            <img src="https://picsum.photos/250/300" />
+            <Button
+              onClick={() => setVisible(true)}
+              style={{
+                margin: "10px 0",
+                backgroundColor: "purple",
+                border: "none",
+                fontSize: "16px",
+              }}
+              type="primary"
+            >
+              Register
+            </Button>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "start",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-              }}
-            >
-              <Title style={{ margin: "0", fontSize: "60px", color: "white" }}>
-                {eventDetails.title}
-              </Title>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-                textAlign: "start",
-              }}
-            >
-              <Text  style={{color:'white', padding:'10px 0', fontSize:"16px"}} >{eventDetails.descriptions} </Text>
-              <Button
-                onClick={() => setVisible(true)}
-                style={{ margin:"10px 0"}}
-                type="primary"
+          <div className={classes.eventdetail_container}>
+            <Title style={{ margin: "0", fontSize: "40px", color: "white" }}>
+              {eventDetails.event_name}
+              <p style={{ margin: "0", fontSize: "16px", fontWeight: "400" }}>
+                Price: {eventDetails.event_price}
+              </p>
+            </Title>
+
+            <div className={classes.eventdetail_headlines}>
+              <span
+                style={{
+                  cursor: "pointer",
+                  color: activeDetails == "about" ? "white" : "gray",
+                }}
+                onClick={() => {
+                  setActiveDetails("about");
+                }}
               >
-                Register
-              </Button>
+                About
+              </span>
+              <span
+                style={{
+                  cursor: "pointer",
+                  color: activeDetails == "timeline" ? "white" : "gray",
+                }}
+                onClick={() => {
+                  setActiveDetails("timeline");
+                }}
+              >
+                Timeline
+              </span>
+              <span
+                style={{
+                  cursor: "pointer",
+                  color: activeDetails == "rules" ? "white" : "gray",
+                }}
+                onClick={() => {
+                  setActiveDetails("rules");
+                }}
+              >
+                Rules
+              </span>
+              <span
+                style={{
+                  cursor: "pointer",
+                  color: activeDetails == "contact" ? "white" : "gray",
+                }}
+                onClick={() => {
+                  setActiveDetails("contact");
+                }}
+              >
+                Contact Us
+              </span>
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-              }}
-            >
-              <Title style={{ color: "white" }}>Timeline</Title>
-              <Title level={3} style={{ color: "white", margin:'0 0 10px' }}>Registration Opening Date:</Title>
-              <Text  style={{ color: "white", marginTop:"5px" }} >
-                {eventDetails?.timeline?.openingRegistrationDate.toLocaleDateString(
-                  "en-US",
-                  options
-                )}
-              </Text>
-              <Title level={3} style={{ color: "white", marginTop:"15px" }}>Final Submission Deadline:</Title>
-              <Text style={{ color: "white", marginTop:"5px" }} >
-                {eventDetails.timeline?.lastRegistrationDate.toLocaleDateString(
-                  "en-US",
-                  options
-                )}
-              </Text>
-              <Title style={{ color: "white" ,marginTop:"15px" }}>Rules</Title>
-              <ul  style={{ listStyletype: "circle", textAlign: "start" }}>
-                {eventDetails?.event_rules?.map((item) => {
-                  return <li style={{ padding:'5px 0', fontSize:"16px"}} >{item}</li>;
+            {activeDetails == "about" && (
+              <div className={classes.eventdetails_details}>
+                {eventDetails?.event_venue?.map((item) => {
+                  return (
+                    <div>
+                      <p style={{ marginBottom: "8px" }}>
+                        {item.timing} {item.date}
+                      </p>
+                      <p style={{ marginBottom: "8px" }}>{item.place}</p>
+                    </div>
+                  );
                 })}
-              </ul>
-              <Title style={{ color: "white", marginBottom:"15px" }}>Contact Us</Title>
-              <ul style={{display:'flex', flexDirection:'column', alignItems:"start"}}>
-                <li style={{color:"white", fontSize:"18px"}} >{eventDetails?.contact?.name}</li>
-                <li style={{color:"white", fontSize:"18px"}} >{eventDetails?.contact?.phone_no}</li>
-                <li style={{color:"white", fontSize:"18px"}} >{eventDetails?.contact?.email}</li>
-              </ul>
-            </div>
+                <p>{eventDetails.event_description}</p>
+              </div>
+            )}
+            {activeDetails == "timeline" && (
+              <div className={classes.eventdetails_details}>
+                <Title level={5} style={{ color: "white", margin: "0 0 10px" }}>
+                  Registration Opening Date:
+                </Title>
+                <Text style={{ color: "white", marginTop: "5px" }}>
+                  {new Date(2022, 3, 4).toLocaleDateString("en-US", options)}
+                </Text>
+                <Title level={5} style={{ color: "white", marginTop: "15px" }}>
+                  Final Submission Deadline:
+                </Title>
+                <Text style={{ color: "white", marginTop: "5px" }}>
+                  {new Date(2022, 3, 21).toLocaleDateString("en-US", options)}
+                </Text>
+              </div>
+            )}
+            {activeDetails == "rules" && (
+              <div className={classes.eventdetails_details}>
+                <ul style={{ listStyletype: "circle" }}>
+                  {eventDetails?.event_rules?.map((item) => {
+                    return (
+                      <li style={{ padding: "5px 0", fontSize: "15px" }}>
+                        {item}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+            {activeDetails == "contact" && (
+              <div className={classes.eventdetails_details}>
+                {eventDetails.event_contact.map((item) => {
+                  return (
+                    <div>
+                      <p
+                        style={{
+                          color: "white",
+                          fontSize: "16px",
+                          marginBottom: "8px",
+                        }}
+                      >
+                        {item?.name}
+                      </p>
+                      <p
+                        style={{
+                          color: "white",
+                          fontSize: "16px",
+                          marginBottom: "8px",
+                        }}
+                      >
+                        {item?.phone_no}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>
       <Modal
         title="Registration"
         centered
+        className="registration_modal"
+        bodyStyle={{ backgroundColor: "rgb(34, 34, 34)" }}
         footer={null}
         visible={visible}
         onOk={() => setVisible(false)}
         onCancel={() => setVisible(false)}
         width={1000}
       >
-        {/* {!otpVerify.verifed && otpVerify.otp == null  && otpVerify.phone_no == null&& (
-          <div
-            style={{
-              display: "flex",
-              margin:"0 auto",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "30%",
+        {
+          <Form
+            className="registration_form"
+            {...formItemLayout}
+            form={form}
+            name="register"
+            onFinish={onFinish}
+            initialValues={{
+              residence: ["zhejiang", "hangzhou", "xihu"],
+              prefix: "86",
             }}
+            scrollToFirstError
           >
-            <Title style={{color:"Black !important", margin:"0" }} >VERIFY </Title>
-            <Text type='secondary' >Enter regiter mobile number</Text>
-            <Form 
-            onFinish={(values)=>{
-             setOtpVerify((prv)=>{
-               return {...prv, phone_no:values.phone_no}
-             })
-            }}
+            <Form.Item
+              name="email"
+              label={<label style={{ color: "white" }}>E-mail</label>}
+              rules={[
+                {
+                  type: "email",
+                  message: "The input is not valid E-mail!",
+                },
+                {
+                  required: true,
+                  message: "Please input your E-mail!",
+                },
+              ]}
             >
-
-           <Form.Item
-           name='phone_no'
-           >
-            <Input placeholder="mobile number" />
+              <Input />
             </Form.Item>
-            <Form.Item >
-              <Button type="primary" htmlType="submit">
+
+            <Form.Item
+              name="first_name"
+              label={<label style={{ color: "white" }}>First Name</label>}
+              tooltip="What do you want others to call you?"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your nickname!",
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="last_name"
+              label={<label style={{ color: "white" }}>Last Name</label>}
+              tooltip="What do you want others to call you?"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your nickname!",
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="institution"
+              label={<label style={{ color: "white" }}>institution</label>}
+              tooltip="your college name"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your college name!",
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              name="enrollment_number"
+              label={
+                <label style={{ color: "white" }}>Enrollment number</label>
+              }
+              tooltip="your college name"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your college name!",
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="institution_type"
+              label={<label style={{ color: "white" }}>Institution Type</label>}
+              tooltip="your college name"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your college name!",
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Select placeholder="select your gender">
+                <Option value="College">College</Option>
+                <Option value="School">School</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item
+              name="phone"
+              label={<label style={{ color: "white" }}>Phone Number</label>}
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your phone number!",
+                },
+              ]}
+            >
+              <Input
+                addonBefore={<p style={{ color: "black" }}>+91</p>}
+                style={{ width: "100%" }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              name="age"
+              label={<label style={{ color: "white" }}>Age</label>}
+              rules={[
+                {
+                  required: true,
+                  message: "Please input age!",
+                  type: "number",
+                  min: 0,
+                  max: 99,
+                },
+              ]}
+            >
+              <InputNumber />
+            </Form.Item>
+
+            {/* <Form.Item
+              name="intro"
+              label="Intro"
+              rules={[{ required: true, message: "Please input Intro" }]}
+            >
+              <Input.TextArea showCount maxLength={100} />
+            </Form.Item> */}
+
+            <Form.Item
+              name="gender"
+              label={<label style={{ color: "white" }}>gender</label>}
+              rules={[{ required: true, message: "Please select gender!" }]}
+            >
+              <Select placeholder="select your gender">
+                <Option value="male">Male</Option>
+                <Option value="female">Female</Option>
+                <Option value="other">Other</Option>
+              </Select>
+            </Form.Item>
+
+            {/* <Form.Item
+              name="agreement"
+              valuePropName="checked"
+              rules={[
+                {
+                  validator: (_, value) =>
+                    value
+                      ? Promise.resolve()
+                      : Promise.reject(new Error("Should accept agreement")),
+                },
+              ]}
+              {...tailFormItemLayout}
+            >
+              <Checkbox style={{color:'white'}} >I have read the agreement</Checkbox>
+            </Form.Item> */}
+            <Form.Item {...tailFormItemLayout}>
+              <Button
+                style={{ backgroundColor: "purple", border: "none" }}
+                type="primary"
+                htmlType="submit"
+              >
                 Pay Now
               </Button>
             </Form.Item>
-            </Form>
-           
-
-          </div>
-        )} */}
-        {/* {!otpVerify.verifed && !otpVerify.otp && otpVerify.phone_no &&  (
-          <div
-            style={{
-              display: "flex",
-              margin:"0 auto",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "30%",
-            }}
-          >
-            <Title style={{color:"Black !important", margin:"0" }} >VERIFY </Title>
-            <Text type='secondary' >Enter the otp sent to regiter mobile number {`${(otpVerify?.value)}`}</Text>
-            <Input placeholder="OTP" />
-            <Button type="primary">VERIFY</Button>
-          </div>
-        )} */}
-        { (
-            <Form
-              {...formItemLayout}
-              form={form}
-              name="register"
-              onFinish={onFinish}
-              initialValues={{
-                residence: ["zhejiang", "hangzhou", "xihu"],
-                prefix: "86",
-              }}
-              scrollToFirstError
-            >
-              <Form.Item
-                name="email"
-                label="E-mail"
-                rules={[
-                  {
-                    type: "email",
-                    message: "The input is not valid E-mail!",
-                  },
-                  {
-                    required: true,
-                    message: "Please input your E-mail!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                name="first_name"
-                label="First Name"
-                tooltip="What do you want others to call you?"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your nickname!",
-                    whitespace: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                name="last_name"
-                label="Last Name"
-                tooltip="What do you want others to call you?"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your nickname!",
-                    whitespace: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                name="institution"
-                label="institution"
-                tooltip="your college name"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your college name!",
-                    whitespace: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                name="enrollment_number"
-                label="Enrollment number"
-                tooltip="your college name"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your college name!",
-                    whitespace: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                name="institution_type"
-                label="Institution Type"
-                tooltip="your college name"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your college name!",
-                    whitespace: true,
-                  },
-                ]}
-              >
-              <Select placeholder="select your gender">
-                  <Option value="College">College</Option>
-                  <Option value="School">School</Option>
-                </Select> 
-              </Form.Item>
-
-              <Form.Item
-                name="phone"
-                label="Phone Number"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your phone number!",
-                  },
-                ]}
-              >
-                <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
-              </Form.Item>
-
-              <Form.Item
-                name="age"
-                label="age"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input age!",
-                    type: "number",
-                    min: 0,
-                    max: 99,
-                  },
-                ]}
-              >
-                <InputNumber />
-              </Form.Item>
-
-              <Form.Item
-                name="intro"
-                label="Intro"
-                rules={[{ required: true, message: "Please input Intro" }]}
-              >
-                <Input.TextArea showCount maxLength={100} />
-              </Form.Item>
-
-              <Form.Item
-                name="gender"
-                label="Gender"
-                rules={[{ required: true, message: "Please select gender!" }]}
-              >
-                <Select placeholder="select your gender">
-                  <Option value="male">Male</Option>
-                  <Option value="female">Female</Option>
-                  <Option value="other">Other</Option>
-                </Select>
-              </Form.Item>
-
-              <Form.Item
-                name="agreement"
-                valuePropName="checked"
-                rules={[
-                  {
-                    validator: (_, value) =>
-                      value
-                        ? Promise.resolve()
-                        : Promise.reject(new Error("Should accept agreement")),
-                  },
-                ]}
-                {...tailFormItemLayout}
-              >
-                <Checkbox>I have read the agreement</Checkbox>
-              </Form.Item>
-              <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
-                  Pay Now
-                </Button>
-              </Form.Item>
-            </Form>
-          )}
+          </Form>
+        }
       </Modal>
     </div>
   );

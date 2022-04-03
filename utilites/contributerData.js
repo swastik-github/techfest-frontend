@@ -25,6 +25,19 @@ const contributersData =[
             }
         }
     },
+    {
+        name:"Rahul Singh",
+        avatar:'/contributers/rahul.jpeg',
+        role:"Developer",
+        contact:{
+            phone_no:8461078033,
+            email:'rahul071000@gmail.com',
+            linkedin:{
+                username:'@rahul7100',
+                link:'https://www.linkedin.com/in/rahul7100/'
+            }
+        }
+    },
     // {
     //     name:"Vaidik Sharma",
     //     avatar:'/contributers/',

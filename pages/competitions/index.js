@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Modal } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import classes from './competition.module.css';
 import clsx from 'clsx';
+import { useAppContext } from '../../context/state';
 function Competitions() {
   const router = useRouter();
+  const values = useAppContext();
+  const { eventList } = values.state;
+  // const [eventList, setEventList] = useState([])
+  // useEffect(() => {
+  //   setEventList(eventData);
+  // }, []);
+
   return (
     <div className={classes.container}>
       <h1 className="heading">COMPETITONS</h1>
       <div className={classes.site_card_wrapper}>
         <Card
-          onClick={() => router.push('/competitions/technical')}
+          onClick={() => router.push('/competitions/technical_events')}
           bordered={false}
           className={classes.cardss}
         >
@@ -22,13 +30,13 @@ function Competitions() {
             alt="hefd"
           />
           <div className={classes.headLine}>
-            <h3> Technical Event </h3>
+            <h3> {eventList[0]?.name} </h3>
             <p> Explore</p>
           </div>
         </Card>
 
         <Card
-          onClick={() => router.push('/competitions/sports')}
+          onClick={() => router.push('/competitions/cultural_events')}
           bordered={false}
           className={classes.cardss}
         >
@@ -39,13 +47,13 @@ function Competitions() {
             alt="hefd"
           />
           <div className={classes.headLine}>
-            <h3> Sport Event </h3>
+            <h3> {eventList[1]?.name} </h3>
             <p> Explore</p>
           </div>
         </Card>
 
         <Card
-          onClick={() => router.push('/competitions/cultural')}
+          onClick={() => router.push('/competitions/sports_events')}
           bordered={false}
           className={classes.cardss}
         >
@@ -56,7 +64,7 @@ function Competitions() {
             alt="hefd"
           />
           <div className={classes.headLine}>
-            <h3> CULTURAL/NON-TECH EVENTS </h3>
+            <h3> {eventList[2]?.name} </h3>
             <p> Explore</p>
           </div>
         </Card>
@@ -75,7 +83,6 @@ function Competitions() {
           />
           <div className={classes.headLine}>
             <h3>TITLE SPONSORS </h3>
-            <p> Explore</p>
           </div>
         </Card>
       </div>
