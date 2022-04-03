@@ -18,56 +18,26 @@ function Competitions() {
     <div className={classes.container}>
       <h1 className="heading">COMPETITONS</h1>
       <div className={classes.site_card_wrapper}>
-        <Card
-          onClick={() => router.push('/competitions/technical_events')}
-          bordered={false}
-          className={classes.cardss}
-        >
-          <Image
-            width={380}
-            height={250}
-            src={'/images/coding.jpg'}
-            alt="hefd"
-          />
-          <div className={classes.headLine}>
-            <h3> {eventList[0]?.name} </h3>
-            <p> Explore</p>
-          </div>
-        </Card>
-
-        <Card
-          onClick={() => router.push('/competitions/cultural_events')}
-          bordered={false}
-          className={classes.cardss}
-        >
-          <Image
-            width={380}
-            height={250}
-            src={'/images/playing.jpg'}
-            alt="hefd"
-          />
-          <div className={classes.headLine}>
-            <h3> {eventList[1]?.name} </h3>
-            <p> Explore</p>
-          </div>
-        </Card>
-
-        <Card
-          onClick={() => router.push('/competitions/sports_events')}
-          bordered={false}
-          className={classes.cardss}
-        >
-          <Image
-            width={380}
-            height={250}
-            src={'/images/dancing.jpg'}
-            alt="hefd"
-          />
-          <div className={classes.headLine}>
-            <h3> {eventList[2]?.name} </h3>
-            <p> Explore</p>
-          </div>
-        </Card>
+        {eventList.map((ev) => (
+          <Card
+            onClick={() =>
+              router.push(`/competitions/${ev?.competition_genre}`)
+            }
+            bordered={false}
+            className={classes.cardss}
+          >
+            <Image
+              width={380}
+              height={250}
+              src={'/images/coding.jpg'}
+              alt={ev?.name}
+            />
+            <div className={classes.headLine}>
+              <h3> {ev?.name} </h3>
+              <p> Explore</p>
+            </div>
+          </Card>
+        ))}
       </div>
       <div style={{ marginTop: '20px' }} className={classes.site_card_wrapper}>
         <Card

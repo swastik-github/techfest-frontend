@@ -21,14 +21,6 @@ export default function Header() {
         <ul className={classes.navitems}>
           <li
             onClick={() => {
-              router.replace('/');
-            }}
-            className={classes.items}
-          >
-            Home
-          </li>
-          <li
-            onClick={() => {
               router.replace('/about');
             }}
             className={classes.items}
@@ -79,15 +71,6 @@ export default function Header() {
         width={1000}
       >
         <div className={classes.modalnav}>
-          <p
-            onClick={() => {
-              router.replace('/');
-              setVisible(false);
-            }}
-            className={classes.modal_item}
-          >
-            HOME
-          </p>
           <p
             onClick={() => {
               router.replace('/about');

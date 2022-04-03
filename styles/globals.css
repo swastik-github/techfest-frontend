@@ -55,30 +55,31 @@ li {
 
 .subHeading {
   font-size: 1.4em;
-/*registration form*/
-.registration_form{
-  background-color:rgb(34, 34, 34);
-  
 }
-.registration_modal .ant-modal-header{
+
+.registration_form {
+  background-color: rgb(34, 34, 34);
+}
+.registration_modal .ant-modal-header {
   background-color: black;
-  
+
   border: none !important;
 }
-.registration_modal .ant-modal-header .ant-modal-title{
+.registration_modal .ant-modal-header .ant-modal-title {
   color: white !important;
 }
-.registration_modal > .ant-modal-content > .ant-modal-close{
+.registration_modal > .ant-modal-content > .ant-modal-close {
   color: white !important;
 }
-.ant-input{
+.ant-input {
   color: white !important;
   border: 0.5px solid black !important;
-  background-color:black !important;
+  background-color: black !important;
 }
 .registration_form > .ant-select-selection-placeholder {
   color: #f0f0f0;
 }
-.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+.ant-form-item-label
+  > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
   color: purple !important;
 }
