@@ -3,19 +3,20 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }
 .body-container {
   width: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
     url(../public/images/b1.webp);
   background-size: 100% 100%;
+  background-attachment: fixed;
   overflow: hidden;
   min-height: 100vh;
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
   background-repeat: no-repeat;
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -30,11 +31,12 @@ p,
 li {
   color: white;
 }
+
 * {
   box-sizing: border-box;
 }
 /* Event List css */
-.ant-card{
+.ant-card {
   background: none !important;
 }
 .ant-card-body {
@@ -43,4 +45,12 @@ li {
 .event-cards > .ant-card-actions {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
   color: white;
+}
+
+.heading {
+  font-size: 2.5em;
+}
+
+.subHeading {
+  font-size: 1.4em;
 }

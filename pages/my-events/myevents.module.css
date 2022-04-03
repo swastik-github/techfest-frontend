@@ -1,16 +1,24 @@
-.container{
-    max-width: 1200px;
-    display: flex;
-    width: 100%;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
+.container {
+  min-height: 85vh;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
 }
-.search_bar{
-    max-width: 40%;
+
+.search_bar {
+  padding-top: 6em;
+  width: 40%;
 }
-@media screen and (max-width: 850px){
-    .search_bar{
-        min-width:80%;
-    }
+
+@media screen and (max-width: 900px) {
+  .search_bar {
+    min-width: 60%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search_bar {
+    min-width: 80%;
+  }
 }

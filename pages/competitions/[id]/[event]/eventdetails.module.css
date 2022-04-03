@@ -36,8 +36,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .container .logo {
@@ -46,15 +44,15 @@
   margin-top: 8px;
   margin-left: 40px;
 }
-.hamburger{
+.hamburger {
   display: none;
 }
-.modalnav{
+.modalnav {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.modal_item{
+.modal_item {
   cursor: pointer !important;
   color: black;
   font-size: 32px;
@@ -75,17 +73,17 @@
 }
 
 @media screen and (max-width: 790px) {
-  .navitems{
+  .navitems {
     display: none;
   }
-  .hamburger{
+  .hamburger {
     display: block;
     margin-right: 5vw;
   }
- .event_img{
-   width: 300px !important;
- }
-  .container .logo{
+  .event_img {
+    width: 300px !important;
+  }
+  .container .logo {
     margin-left: 5vw;
     width: 8rem;
   }
@@ -97,6 +95,5 @@
   }
   .img_container img {
     width: 80%;
-    
   }
 }
