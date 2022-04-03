@@ -6,15 +6,18 @@ import { useAppContext } from "../../../context/state";
 function CompetitionDetails() {
   const router = useRouter();
   const { id } = router.query;
-  let filteredEventData;
+  let filteredEventData = [];
   const [eventList, seteventList] = useState([]);
   const value = useAppContext();
   let { setisRegisterVisible, eventList: eventData } = value.state;
   useEffect(() => {
     if (router.isReady) {
-      filteredEventData = eventData.filter((item) => {
+      filteredEventData = eventData?.filter((item) => {
         return item.competition_genre == id;
       });
+      if (filteredEventData.length == 0) {
+        router.push("/404");
+      }
       console.log(filteredEventData[0], "filterdevents");
       seteventList(filteredEventData[0]);
     }
@@ -25,7 +28,7 @@ function CompetitionDetails() {
       <h1
         style={{ color: "white", textTransform: "uppercase", fontSize: "40px" }}
       >
-       {eventList.name}
+        {eventList?.name}
       </h1>
       <div className={classes.event_list}>
         {eventList &&

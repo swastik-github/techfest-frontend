@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import classes from './eventdetails.module.css';
-import { Button, Image, Modal, Typography } from 'antd';
-import { useAppContext } from '../../../../context/state';
-import { Form, Input, InputNumber, Select, Checkbox } from 'antd';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import classes from "./eventdetails.module.css";
+import { Button, Image, Modal, Typography, message, Alert } from "antd";
+import { useAppContext } from "../../../../context/state";
+import { CheckCircleTwoTone, CloseCircleOutlined } from "@ant-design/icons";
+import { Form, Input, InputNumber, Select, Checkbox } from "antd";
+import axios from "axios";
 const { Option } = Select;
 const { Title, Text } = Typography;
 const formItemLayout = {
@@ -34,18 +35,23 @@ function CompetitionDetails() {
   const { event, id } = router.query;
   const value = useAppContext();
   let { isRegisterVisible, setisRegisterVisible, eventList } = value.state;
-
+  const [isPaymentDone, setIsPaymentDone] = useState(false);
+  const [paymentDetails, setPaymentDetails] = useState({});
   const initalRegisterValue = isRegisterVisible;
   const [eventDetails, seteventDetails] = useState({});
-  const [activeDetails, setActiveDetails] = useState('about');
+  const [activeDetails, setActiveDetails] = useState("about");
   const [visible, setVisible] = useState(initalRegisterValue);
 
+  const errorMessage = (err) => {
+    return message.error(err, 10);
+    // return <Alert message="Error" description={err} type="error" showIcon />;
+  };
   useEffect(() => {
     setisRegisterVisible(false);
   }, []);
   function loadScript(src) {
     return new Promise((resolve) => {
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.src = src;
       script.onload = () => {
         resolve(true);
@@ -58,54 +64,65 @@ function CompetitionDetails() {
   }
   useEffect(async () => {
     if (router.isReady) {
-      let filterdEvents = eventList.filter((item) => {
+      let filterdEvents = [];
+      filterdEvents = eventList?.filter((item) => {
         return item.competition_genre == id;
       });
-      let filterdEventsDetails = filterdEvents[0]?.events?.filter((item) => {
+      if (filterdEvents.length == 0) {
+        router.push("/404");
+      }
+      let filterdEventsDetails = [];
+      filterdEventsDetails = filterdEvents[0]?.events?.filter((item) => {
         return item.event_id == event;
       });
+      if (filterdEventsDetails.length == 0) {
+        router.push("/404");
+      }
       seteventDetails(filterdEventsDetails[0]);
-      console.log(filterdEventsDetails[0], 'event details');
     }
   }, [router.isReady]);
 
   let options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   };
 
   const [form] = Form.useForm();
   const onFinish = async (values) => {
-    console.log('Received values of form: ', values);
     const res = await loadScript(
-      'https://checkout.razorpay.com/v1/checkout.js'
+      "https://checkout.razorpay.com/v1/checkout.js"
     );
-    console.log(res, 'load script');
+    // console.log(res, "load script");
     if (!res) {
-      alert('Razorpay SDK failed to load. Are you online?');
+      alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
 
     // creating a new order
-    const result = await axios.post(
-      `http://localhost:8000/v1/account/register/${id}/${event}`,
-      values
-    );
-
-    if (!result) {
-      alert('Server error. Are you online?');
-      return;
+    let result;
+    try {
+      result = await axios.post(
+        `http://localhost:8000/v1/account/register/${id}/${event}`,
+        values
+      );
+    } catch (err) {
+      return errorMessage(err.response.data.errors[0].message);
     }
+
+    // if (!result) {
+    //   alert("Server error. Are you online?");
+    //   return;
+    // }
     console.log(result);
     const { amount, id: order_id, currency } = result.data.rzp;
 
     const options = {
-      key: 'rzp_test_nfw7iyeLH8zYuW', // Enter the Key ID generated from the Dashboard
+      key: "rzp_test_nfw7iyeLH8zYuW", // Enter the Key ID generated from the Dashboard
       amount: amount.toString(),
       currency: currency,
-      name: 'TechFizz',
+      name: "TechFizz",
       description: eventDetails.event_name,
       // image: { logo },
       order_id: order_id,
@@ -119,27 +136,35 @@ function CompetitionDetails() {
         console.log(response);
         console.log(data);
 
-        const result = await axios.post(
-          'http://localhost:8000/v1/events/payment',
-          data
-        );
-
-        console.log(result);
+        let result;
+        try {
+          result = await axios.post(
+            "http://localhost:8000/v1/events/payment",
+            data
+          );
+        } catch (error) {
+          setPaymentDetails(error.response);
+          setIsPaymentDone(true);
+        }
+        setPaymentDetails(result.data);
+        setIsPaymentDone(true);
+        console.log(result.data, "scussesfull");
         // alert(result.data.msg);
       },
       prefill: {
-        name: values.first_name + ' ' + values.last_name,
+        name: values.first_name + " " + values.last_name,
         email: values.email,
         contact: values.phone,
       },
       theme: {
-        color: '#61dafb',
+        color: "#61dafb",
       },
     };
 
     const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
     form.resetFields();
+    setVisible(false);
+    paymentObject.open();
   };
 
   // const prefixSelector = (
@@ -152,17 +177,17 @@ function CompetitionDetails() {
 
   return (
     <div className={classes.container}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
         <div className={classes.container_box}>
           <div className={classes.img_container}>
             <img src="https://picsum.photos/250/300" />
             <Button
               onClick={() => setVisible(true)}
               style={{
-                margin: '10px 0',
-                backgroundColor: 'purple',
-                border: 'none',
-                fontSize: '16px',
+                margin: "10px 0",
+                backgroundColor: "purple",
+                border: "none",
+                fontSize: "16px",
               }}
               type="primary"
             >
@@ -170,96 +195,96 @@ function CompetitionDetails() {
             </Button>
           </div>
           <div className={classes.eventdetail_container}>
-            <Title style={{ margin: '0', fontSize: '40px', color: 'white' }}>
-              {eventDetails.event_name}
-              <p style={{ margin: '0', fontSize: '16px', fontWeight: '400' }}>
-                Price: {eventDetails.event_price}
+            <Title style={{ margin: "0", fontSize: "40px", color: "white" }}>
+              {eventDetails?.event_name}
+              <p style={{ margin: "0", fontSize: "16px", fontWeight: "400" }}>
+                Price: {eventDetails?.event_price}
               </p>
             </Title>
 
             <div className={classes.eventdetail_headlines}>
               <span
                 style={{
-                  cursor: 'pointer',
-                  color: activeDetails == 'about' ? 'white' : 'gray',
+                  cursor: "pointer",
+                  color: activeDetails == "about" ? "white" : "gray",
                 }}
                 onClick={() => {
-                  setActiveDetails('about');
+                  setActiveDetails("about");
                 }}
               >
                 About
               </span>
               <span
                 style={{
-                  cursor: 'pointer',
-                  color: activeDetails == 'timeline' ? 'white' : 'gray',
+                  cursor: "pointer",
+                  color: activeDetails == "timeline" ? "white" : "gray",
                 }}
                 onClick={() => {
-                  setActiveDetails('timeline');
+                  setActiveDetails("timeline");
                 }}
               >
                 Timeline
               </span>
               <span
                 style={{
-                  cursor: 'pointer',
-                  color: activeDetails == 'rules' ? 'white' : 'gray',
+                  cursor: "pointer",
+                  color: activeDetails == "rules" ? "white" : "gray",
                 }}
                 onClick={() => {
-                  setActiveDetails('rules');
+                  setActiveDetails("rules");
                 }}
               >
                 Rules
               </span>
               <span
                 style={{
-                  cursor: 'pointer',
-                  color: activeDetails == 'contact' ? 'white' : 'gray',
+                  cursor: "pointer",
+                  color: activeDetails == "contact" ? "white" : "gray",
                 }}
                 onClick={() => {
-                  setActiveDetails('contact');
+                  setActiveDetails("contact");
                 }}
               >
                 Contact Us
               </span>
             </div>
-            {activeDetails == 'about' && (
+            {activeDetails == "about" && (
               <div className={classes.eventdetails_details}>
                 {eventDetails?.event_venue?.map((item) => {
                   return (
                     <div>
-                      <p style={{ marginBottom: '8px' }}>
+                      <p style={{ marginBottom: "8px" }}>
                         {item.timing} {item.date}
                       </p>
-                      <p style={{ marginBottom: '8px' }}>{item.place}</p>
+                      <p style={{ marginBottom: "8px" }}>{item.place}</p>
                     </div>
                   );
                 })}
-                <p>{eventDetails.event_description}</p>
+                <p>{eventDetails?.event_description}</p>
               </div>
             )}
-            {activeDetails == 'timeline' && (
+            {activeDetails == "timeline" && (
               <div className={classes.eventdetails_details}>
-                <Title level={5} style={{ color: 'white', margin: '0 0 10px' }}>
+                <Title level={5} style={{ color: "white", margin: "0 0 10px" }}>
                   Registration Opening Date:
                 </Title>
-                <Text style={{ color: 'white', marginTop: '5px' }}>
-                  {new Date(2022, 3, 4).toLocaleDateString('en-US', options)}
+                <Text style={{ color: "white", marginTop: "5px" }}>
+                  {new Date(2022, 3, 4).toLocaleDateString("en-US", options)}
                 </Text>
-                <Title level={5} style={{ color: 'white', marginTop: '15px' }}>
+                <Title level={5} style={{ color: "white", marginTop: "15px" }}>
                   Final Submission Deadline:
                 </Title>
-                <Text style={{ color: 'white', marginTop: '5px' }}>
-                  {new Date(2022, 3, 21).toLocaleDateString('en-US', options)}
+                <Text style={{ color: "white", marginTop: "5px" }}>
+                  {new Date(2022, 3, 21).toLocaleDateString("en-US", options)}
                 </Text>
               </div>
             )}
-            {activeDetails == 'rules' && (
+            {activeDetails == "rules" && (
               <div className={classes.eventdetails_details}>
-                <ul style={{ listStyletype: 'circle' }}>
+                <ul style={{ listStyletype: "circle" }}>
                   {eventDetails?.event_rules?.map((item) => {
                     return (
-                      <li style={{ padding: '5px 0', fontSize: '15px' }}>
+                      <li style={{ padding: "5px 0", fontSize: "15px" }}>
                         {item}
                       </li>
                     );
@@ -267,25 +292,25 @@ function CompetitionDetails() {
                 </ul>
               </div>
             )}
-            {activeDetails == 'contact' && (
+            {activeDetails == "contact" && (
               <div className={classes.eventdetails_details}>
-                {eventDetails?.event_contact?.map((item) => {
+                {eventDetails?.contact?.map((item) => {
                   return (
                     <div>
                       <p
                         style={{
-                          color: 'white',
-                          fontSize: '16px',
-                          marginBottom: '8px',
+                          color: "white",
+                          fontSize: "16px",
+                          marginBottom: "8px",
                         }}
                       >
                         {item?.name}
                       </p>
                       <p
                         style={{
-                          color: 'white',
-                          fontSize: '16px',
-                          marginBottom: '8px',
+                          color: "white",
+                          fontSize: "16px",
+                          marginBottom: "8px",
                         }}
                       >
                         {item?.phone_no}
@@ -299,10 +324,14 @@ function CompetitionDetails() {
         </div>
       </div>
       <Modal
-        title="Registration"
+        title={
+          <Title level={2} style={{ color: "white", margin: "0" }}>
+            Registration
+          </Title>
+        }
         centered
         className="registration_modal"
-        // bodyStyle={{ backgroundColor: "rgb(34, 34, 34)" }}
+        bodyStyle={{ backgroundColor: "rgb(34, 34, 34)", color: "white" }}
         footer={null}
         visible={visible}
         onOk={() => setVisible(false)}
@@ -317,8 +346,8 @@ function CompetitionDetails() {
             name="register"
             onFinish={onFinish}
             initialValues={{
-              residence: ['zhejiang', 'hangzhou', 'xihu'],
-              prefix: '86',
+              residence: ["zhejiang", "hangzhou", "xihu"],
+              prefix: "86",
             }}
             scrollToFirstError
           >
@@ -327,12 +356,12 @@ function CompetitionDetails() {
               label={<label style={{}}>E-mail</label>}
               rules={[
                 {
-                  type: 'email',
-                  message: 'The input is not valid E-mail!',
+                  type: "email",
+                  message: "The input is not valid E-mail!",
                 },
                 {
                   required: true,
-                  message: 'Please input your E-mail!',
+                  message: "Please input your E-mail!",
                 },
               ]}
             >
@@ -346,7 +375,7 @@ function CompetitionDetails() {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your nickname!',
+                  message: "Please input your nickname!",
                   whitespace: true,
                 },
               ]}
@@ -360,7 +389,7 @@ function CompetitionDetails() {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your nickname!',
+                  message: "Please input your nickname!",
                   whitespace: true,
                 },
               ]}
@@ -369,12 +398,12 @@ function CompetitionDetails() {
             </Form.Item>
             <Form.Item
               name="institution"
-              label={<label style={{ color: 'white' }}>institution</label>}
+              label={<label>Institution</label>}
               tooltip="your college name"
               rules={[
                 {
                   required: true,
-                  message: 'Please input your college name!',
+                  message: "Please input your college name!",
                   whitespace: true,
                 },
               ]}
@@ -389,7 +418,7 @@ function CompetitionDetails() {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your college name!',
+                  message: "Please input your college name!",
                   whitespace: true,
                 },
               ]}
@@ -403,14 +432,14 @@ function CompetitionDetails() {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your college name!',
+                  message: "Please input your college name!",
                   whitespace: true,
                 },
               ]}
             >
               <Select
                 // dropdownClassName="ant-dropdown"
-                placeholder="select your gender"
+                placeholder="select your institution type"
               >
                 <Option value="College">College</Option>
                 <Option value="School">School</Option>
@@ -423,13 +452,19 @@ function CompetitionDetails() {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your phone number!',
+                  validator: async (_, phone) => {
+                    if (phone.length !== 10) {
+                      return Promise.reject(
+                        new Error("Phone number must be 10 digit")
+                      );
+                    }
+                  },
                 },
               ]}
             >
               <Input
-                addonBefore={<p style={{ color: 'black', margin: '0' }}>+91</p>}
-                style={{ width: '100%' }}
+                addonBefore={<p style={{ color: "white", margin: "0" }}>+91</p>}
+                style={{ width: "100%" }}
               />
             </Form.Item>
 
@@ -439,8 +474,8 @@ function CompetitionDetails() {
               rules={[
                 {
                   required: true,
-                  message: 'Please input age!',
-                  type: 'number',
+                  message: "Please input age!",
+                  type: "number",
                   min: 0,
                   max: 99,
                 },
@@ -459,8 +494,8 @@ function CompetitionDetails() {
 
             <Form.Item
               name="gender"
-              label={<label style={{}}>gender</label>}
-              rules={[{ required: true, message: 'Please select gender!' }]}
+              label={<label style={{}}>Gender</label>}
+              rules={[{ required: true, message: "Please select gender!" }]}
             >
               <Select
                 // dropdownClassName="ant-dropdown"
@@ -472,24 +507,9 @@ function CompetitionDetails() {
               </Select>
             </Form.Item>
 
-            {/* <Form.Item
-              name="agreement"
-              valuePropName="checked"
-              rules={[
-                {
-                  validator: (_, value) =>
-                    value
-                      ? Promise.resolve()
-                      : Promise.reject(new Error("Should accept agreement")),
-                },
-              ]}
-              {...tailFormItemLayout}
-            >
-              <Checkbox style={{color:'white'}} >I have read the agreement</Checkbox>
-            </Form.Item> */}
             <Form.Item {...tailFormItemLayout}>
               <Button
-                style={{ backgroundColor: 'purple', border: 'none' }}
+                style={{ backgroundColor: "purple", border: "none" }}
                 type="primary"
                 htmlType="submit"
               >
@@ -498,6 +518,60 @@ function CompetitionDetails() {
             </Form.Item>
           </Form>
         }
+      </Modal>
+      <Modal
+        title={
+          <Title level={2} style={{ color: "white", margin: "0" }}>
+            Payment
+          </Title>
+        }
+        centered
+        bodyStyle={{
+          backgroundColor: "rgb(34, 34, 34)",
+          color: "white",
+        }}
+        footer={null}
+        width="50vw"
+        visible={isPaymentDone}
+        onOk={() => setIsPaymentDone(false)}
+        onCancel={() => setIsPaymentDone(false)}
+      >
+        <div
+          style={{
+            display: "flex",
+            height: "50vh",
+            gap: "10px",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text type="warning">Take a screenshot for safety</Text>
+          {paymentDetails.status == "success" ? (
+            <CheckCircleTwoTone
+              style={{ fontSize: "100px" }}
+              twoToneColor="#52c41a"
+            />
+          ) : (
+            <CloseCircleOutlined
+              style={{ fontSize: "100px" }}
+              twoToneColor="red"
+            />
+          )}
+          <Title style={{ color: "white" }}>{paymentDetails.status}</Title>
+          <Text
+            type={paymentDetails.status == "success" ? "success" : "danger"}
+          >
+            {" "}
+            <Text strong>Order ID:</Text> {paymentDetails.order_id}
+          </Text>
+          <Text
+            type={paymentDetails.status == "success" ? "success" : "danger"}
+          >
+            {" "}
+            <Text strong>Transition ID:</Text> {paymentDetails.transaction_id}
+          </Text>
+        </div>
       </Modal>
     </div>
   );

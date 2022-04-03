@@ -1,11 +1,12 @@
-import '../styles/globals.css';
-import 'antd/dist/antd.css';
-import '../styles/Slider.css';
-import Head from 'next/head';
-import Header from '../components/header/Header';
-import { AppWrapper } from '../context/state';
-import Footer from '../components/footer/Footer';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import "../styles/globals.css";
+import "antd/dist/antd.css";
+import "../styles/Slider.css";
+import "../styles/antd.less";
+import Head from "next/head";
+import Header from "../components/header/Header";
+import { AppWrapper } from "../context/state";
+import Footer from "../components/footer/Footer";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 function MyApp({ Component, pageProps }) {
   return (
     <AppWrapper>
