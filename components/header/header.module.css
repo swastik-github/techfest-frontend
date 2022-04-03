@@ -58,9 +58,8 @@
 }
 
 .modal_item {
-  color: black;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 800;
 }
 .modal_item:active {
   font-weight: 500;
@@ -69,7 +68,7 @@
   top: 2px;
 }
 .register span {
-  color: white;
+  color: white !important;
   font-weight: 800;
 }
 .sponsors h1 {
@@ -84,6 +83,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 }
 
 .hamburger {

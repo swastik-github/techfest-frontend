@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import classes from './header.module.css';
-import { Modal } from 'antd';
-import { useRouter } from 'next/router';
+import React, { useState } from "react";
+import classes from "./header.module.css";
+import { Modal, Typography } from "antd";
+import { useRouter } from "next/router";
+
+const { Text } = Typography;
 export default function Header() {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
@@ -9,11 +11,11 @@ export default function Header() {
     <div className={classes.container}>
       <div className={classes.navbar}>
         <img
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: "pointer" }}
           onClick={() => {
-            router.replace('/');
+            router.replace("/");
           }}
-          src={'/images/logo.png'}
+          src={"/images/logo.png"}
           className={classes.logo}
           alt=""
         />
@@ -21,7 +23,7 @@ export default function Header() {
         <ul className={classes.navitems}>
           <li
             onClick={() => {
-              router.replace('/about');
+              router.replace("/about");
             }}
             className={classes.items}
           >
@@ -29,7 +31,7 @@ export default function Header() {
           </li>
           <li
             onClick={() => {
-              router.replace('/contributers');
+              router.replace("/contributers");
             }}
             className={classes.items}
           >
@@ -37,7 +39,7 @@ export default function Header() {
           </li>
           <li
             onClick={() => {
-              router.replace('/my-events');
+              router.replace("/my-events");
             }}
             className={classes.items}
           >
@@ -45,12 +47,12 @@ export default function Header() {
           </li>
           <li
             onClick={() => {
-              router.replace('/competitions');
+              router.replace("/competitions");
             }}
             className={classes.register}
           >
-            {' '}
-            <span>COMPETITIONS</span>{' '}
+            {" "}
+            <span>COMPETITIONS</span>{" "}
           </li>
         </ul>
         <img
@@ -71,34 +73,34 @@ export default function Header() {
         width={1000}
       >
         <div className={classes.modalnav}>
-          <p
+          <Text
             onClick={() => {
-              router.replace('/about');
+              router.replace("/about");
               setVisible(false);
             }}
             className={classes.modal_item}
           >
             ABOUT
-          </p>
-          <p
+          </Text>
+          <Text
             onClick={() => {
-              router.replace('/contributers');
+              router.replace("/contributers");
               setVisible(false);
             }}
             className={classes.modal_item}
           >
             CONTRIBUTERS
-          </p>
-          <p
+          </Text>
+          <Text
             onClick={() => {
-              router.replace('/competitions');
+              router.replace("/competitions");
               setVisible(false);
             }}
             className={classes.register}
           >
-            {' '}
-            <span>COMPETITIONS</span>{' '}
-          </p>
+            {" "}
+            <span>COMPETITIONS</span>{" "}
+          </Text>
         </div>
       </Modal>
     </div>
