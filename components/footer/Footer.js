@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
-import React from 'react';
-import classes from './Footer.module.css';
-import Image from 'next/image';
+import { useRouter } from "next/router";
+import React from "react";
+import classes from "./Footer.module.css";
+import Image from "next/image";
 const Footer = () => {
   const router = useRouter();
   return (
@@ -9,25 +9,25 @@ const Footer = () => {
       <div className={classes.box}>
         <h3>Quick Link</h3>
         <a
-          onClick={() => {
-            router.replace('/');
-          }}
+          href="https://docs.google.com/document/d/1Ti11tuYSd0rWg_sTxIddkgRBJelP8cSO-qpzHTj1fXA/edit?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Home
+          Privacy Policy
         </a>
         <a
-          onClick={() => {
-            router.replace('/about');
-          }}
+          href="https://docs.google.com/document/d/1RapzS5PYlMbbK_Q78OPYvYhrpHf0eba4tJzztWRTXSI/edit?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          About
+          Refund Policy
         </a>
         <a
-          onClick={() => {
-            router.replace('/contributers');
-          }}
+          href="https://docs.google.com/document/d/1FC-vQsbkeX7cp3b-35XVQEjsnXw5rFtHAG-bGbG4dPs/edit?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Contributer
+          Terms and Conditions
         </a>
       </div>
       <div className={classes.box}>
@@ -47,7 +47,7 @@ const Footer = () => {
             <Image
               width={43}
               height={43}
-              src={'/images/instagram.png'}
+              src={"/images/instagram.png"}
               alt=""
             />
           </a>
@@ -56,17 +56,17 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image width={43} height={43} src={'/images/facebook.png'} alt="" />
+            <Image width={43} height={43} src={"/images/facebook.png"} alt="" />
           </a>
           <a href="" target="_blank" rel="noopener noreferrer">
-            <Image width={43} height={43} src={'/images/twitter.png'} alt="" />
+            <Image width={43} height={43} src={"/images/twitter.png"} alt="" />
           </a>
           <a
             href="https://www.youtube.com/watch?v=Y1xGqD_icBY"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image width={43} height={43} src={'/images/youtube.png'} alt="" />
+            <Image width={43} height={43} src={"/images/youtube.png"} alt="" />
           </a>
         </div>
       </div>
