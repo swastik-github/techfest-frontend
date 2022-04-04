@@ -8,6 +8,8 @@
 .navitems {
   display: flex;
   align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(196, 176, 196);
   justify-content: space-between;
   margin-bottom: 0;
 }

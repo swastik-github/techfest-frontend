@@ -13,7 +13,6 @@ function Competitions() {
   // useEffect(() => {
   //   setEventList(eventData);
   // }, []);
-
   return (
     <div className={classes.container}>
       <h1 className="heading">COMPETITONS</h1>

@@ -84,6 +84,15 @@ export default function Header() {
           </Text>
           <Text
             onClick={() => {
+              router.replace("/my-events");
+              setVisible(false);
+            }}
+            className={classes.modal_item}
+          >
+            My Events
+          </Text>
+          <Text
+            onClick={() => {
               router.replace("/contributers");
               setVisible(false);
             }}

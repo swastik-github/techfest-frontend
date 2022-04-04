@@ -3,6 +3,7 @@ import { Input, Typography } from "antd";
 import classes from "./myevents.module.css";
 import axios from "axios";
 import { useAppContext } from "../../context/state";
+import { handleApiError } from "../../utilites";
 const { Search } = Input;
 const { Text, Title } = Typography;
 function MyEvents() {
@@ -20,9 +21,12 @@ function MyEvents() {
   const onSearch = (value) => {
     setIsLoading(true);
     axios
-      .post(`http://localhost:8000/v1/account/registered_events`, {
-        phone: value,
-      })
+      .post(
+        `${process.env.NEXT_PUBLIC_FETCH_API}/v1/account/registered_events`,
+        {
+          phone: value,
+        }
+      )
       .then((response) => {
         let eventIdList = response?.data?.events;
         let filteredSearchEvents = [];
@@ -44,7 +48,11 @@ function MyEvents() {
         setEventList(filteredSearchEvents);
         setIsLoading(false);
       })
-      .catch((err) => console.warn(err.response));
+      .catch((err) => {
+        console.warn(err.response);
+        setIsLoading(false);
+        handleApiError(err.response);
+      });
 
     console.log(eventList, "filterd list");
   };
