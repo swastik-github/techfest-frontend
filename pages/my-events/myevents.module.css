@@ -1,14 +1,35 @@
 .container {
-  min-height: 85vh;
   display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
   width: 100%;
   margin: 0 auto;
-  justify-content: center;
 }
 
 .search_bar {
-  padding-top: 6em;
   width: 40%;
+}
+.event_container {
+  max-width: 80vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 100px !important;
+  justify-content: center;
+  margin: 0 auto;
+}
+.event_box {
+  background-color: black;
+  padding: 12px 6px;
+  width: 500px;
+  justify-content: center;
+  gap: 20px 20px;
+  border: 1px solid purple;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 900px) {
