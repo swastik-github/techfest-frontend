@@ -57,6 +57,10 @@ li {
   font-size: 1.4em;
 }
 
+.ant-notification-notice-with-icon .ant-notification-notice-message {
+  color: white;
+}
+
 /* .registration_form {
   background-color: rgb(34, 34, 34);
 }
