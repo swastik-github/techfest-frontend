@@ -34,12 +34,7 @@ function Competitions() {
               bordered={false}
               className={classes.cardss}
             >
-              <Image
-                width={380}
-                height={250}
-                src={"/images/coding.jpg"}
-                alt={ev?.name}
-              />
+              <Image src={"/images/coding.jpg"} alt={ev?.name} />
               <div className={classes.headLine}>
                 <h3> {ev?.name} </h3>
                 <p> Explore</p>
