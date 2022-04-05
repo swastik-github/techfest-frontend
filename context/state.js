@@ -9,7 +9,6 @@ export function AppWrapper({ children }) {
   const [eventList, setEventList] = useState([]);
   useEffect(async () => {
     let response;
-    console.log(process.env.NEXT_PUBLIC_FETCH_API);
     try {
       response = await axios.get(
         `${process.env.NEXT_PUBLIC_FETCH_API}/v1/events`
@@ -17,7 +16,7 @@ export function AppWrapper({ children }) {
     } catch (err) {
       handleApiError(err.response);
     }
-    console.log(response);
+
     setEventList(response?.data?.competitions);
   }, []);
 

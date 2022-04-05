@@ -49,12 +49,9 @@ function MyEvents() {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.warn(err.response);
         setIsLoading(false);
         handleApiError(err.response);
       });
-
-    console.log(eventList, "filterd list");
   };
 
   return (

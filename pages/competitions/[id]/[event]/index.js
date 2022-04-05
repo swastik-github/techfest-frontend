@@ -95,7 +95,6 @@ function CompetitionDetails() {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
-    // console.log(res, "load script");
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
@@ -117,11 +116,10 @@ function CompetitionDetails() {
     //   alert("Server error. Are you online?");
     //   return;
     // }
-    console.log(result);
     const { amount, id: order_id, currency } = result.data.rzp;
 
     const options = {
-      key: "rzp_test_nfw7iyeLH8zYuW", // Enter the Key ID generated from the Dashboard
+      key: process.env.NEXT_PUBLIC_RAZORPAY_API, // Enter the Key ID generated from the Dashboard
       amount: amount.toString(),
       currency: currency,
       name: "TechFizz",
@@ -135,8 +133,6 @@ function CompetitionDetails() {
           razorpay_order_id: response.razorpay_order_id,
           razorpay_signature: response.razorpay_signature,
         };
-        console.log(response);
-        console.log(data);
 
         let result;
         try {
@@ -152,7 +148,6 @@ function CompetitionDetails() {
         }
         setPaymentDetails(result.data);
         setIsPaymentDone(true);
-        console.log(result.data, "scussesfull");
         // alert(result.data.msg);
       },
       prefill: {

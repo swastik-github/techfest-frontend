@@ -7,8 +7,6 @@ export const handleApiError = (res) => {
   //   statusText: statusText || "Try again after sometime",
   // });
 
-  // console.log(res.status, res.data?.errors[0]?.message, "testtt");
-
   switch (res.status) {
     case 400:
       Notification("error", "Error", res.data?.errors[0]?.message);

@@ -50,13 +50,11 @@ const Slider = () => {
 
   /* Play Timer */
   const playTimer = () => {
-    console.log("play Timer");
     setActiveAutoplay(true);
   };
 
   /* Pause Timer */
   const pauseTimer = () => {
-    console.log("pause Timer");
     setActiveAutoplay(false);
   };
 

@@ -18,7 +18,6 @@ function CompetitionDetails() {
       if (filteredEventData.length == 0) {
         router.push("/404");
       }
-      console.log(filteredEventData[0], "filterdevents");
       seteventList(filteredEventData[0]);
     }
   }, [router.isReady]);
