@@ -4,31 +4,37 @@ import { Card, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import classes from "./eventlist.module.css";
 import { useAppContext } from "../../../context/state";
+import axios from "axios";
 function CompetitionDetails() {
   const router = useRouter();
   const { id } = router.query;
   let filteredEventData = [];
   const [eventData, seteventData] = useState([]);
   const values = useAppContext();
-  const { setisRegisterVisible, eventList } = values.state;
+  const { setisRegisterVisible } = values.state;
   useEffect(() => {
     if (router.isReady) {
-      console.log(eventList, "data");
-      if (eventList.length > 0) {
-        filteredEventData = eventList.filter((item) => {
-          return item.competition_genre == id;
+      let eventList = [];
+      axios
+        .get(`${process.env.NEXT_PUBLIC_FETCH_API}/v1/events`)
+        .then((response) => {
+          eventList = response?.data?.competitions;
+          if (eventList.length > 0) {
+            filteredEventData = eventList.filter((item) => {
+              return item.competition_genre == id;
+            });
+            if (filteredEventData.length == 0) {
+              console.log(filteredEventData.length == 0, "really");
+              return router.push("/404");
+            }
+            seteventData(filteredEventData[0]);
+          }
+        })
+        .catch((err) => {
+          handleApiError(err.response);
         });
-        console.log(eventList, "event data");
-        console.log(filteredEventData);
-        if (filteredEventData.length == 0) {
-          console.log(filteredEventData.length == 0, "really");
-          // return router.push("/404");
-        }
-      }
-
-      seteventData(filteredEventData[0]);
     }
-  }, [router.isReady, eventList]);
+  }, [router.isReady]);
 
   return (
     <div className={classes.container} style={{ textAlign: "center" }}>
