@@ -12,6 +12,11 @@
   display: flex;
   flex-direction: column;
 }
+.img_container img{
+  width: 250px;
+  height: 320px;
+  object-fit: cover;
+}
 .navbar {
   max-width: 1600px;
   margin: 0 auto;
@@ -97,6 +102,7 @@
   }
   .img_container {
     width: 100%;
+    object-fit: contain;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -107,6 +113,7 @@
   .img_container img {
     width: 300px;
     height: 400px;
+    object-fit: contain;
   }
 }
 @media only screen and (max-width: 500px) {
@@ -120,7 +127,7 @@
     width: 90%;
   }
   .img_container img {
-    width: 80%;
+    width: 100%;
     height: 400px;
   }
 }

@@ -99,6 +99,7 @@ function CompetitionDetails() {
           } else {
             router.push("/404");
           }
+          console.log(filterdEventsDetails);
           seteventDetails(filterdEventsDetails?.[0]);
         })
         .catch((err) => {
@@ -206,7 +207,7 @@ function CompetitionDetails() {
         >
           <div className={classes.container_box}>
             <div className={classes.img_container}>
-              <img src="https://images.unsplash.com/photo-1580830488699-3f7472613b11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80" />
+              <img src="https://images.unsplash.com/photo-1580830488699-3f7472613b11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" />
               <Button
                 onClick={() => setVisible(true)}
                 style={{
@@ -223,9 +224,30 @@ function CompetitionDetails() {
             <div className={classes.eventdetail_container}>
               <Title style={{ margin: "0", fontSize: "40px", color: "white" }}>
                 {eventDetails?.event_name}
-                <p style={{ margin: "0", fontSize: "16px", fontWeight: "400" }}>
-                  Price: {eventDetails?.event_price}
+                <p
+                  style={{
+                    margin: "0",
+                    fontSize: "16px",
+                    fontWeight: "400",
+                  }}
+                >
+                  {" "}
+                  <Text strong>Price -</Text>
                 </p>
+
+                {eventDetails.event_price.map((price) => {
+                  return (
+                    <p
+                      style={{
+                        margin: "0",
+                        fontSize: "16px",
+                        fontWeight: "400",
+                      }}
+                    >
+                      {price.key}- {price.price}
+                    </p>
+                  );
+                })}
               </Title>
 
               <div className={classes.eventdetail_headlines}>

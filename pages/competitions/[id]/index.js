@@ -71,7 +71,12 @@ function CompetitionDetails() {
                 }}
                 cover={
                   <img
-                    style={{ borderRadius: "5px" }}
+                    style={{
+                      borderRadius: "5px 5px 0 0",
+                      height: "100%",
+                      width: "100%",
+                      objectFit: "cover",
+                    }}
                     alt={item.title}
                     src="https://images.unsplash.com/photo-1580830488699-3f7472613b11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
                   />

@@ -44,6 +44,9 @@ li {
 .ant-card-body {
   padding: 0px !important;
 }
+.ant-card-bordered .ant-card-cover{
+  height: 100%;
+}
 .event-cards > .ant-card-actions {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
   color: white;
