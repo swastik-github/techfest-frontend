@@ -8,17 +8,17 @@ function CompetitionDetails() {
   const router = useRouter();
   const { id } = router.query;
   let filteredEventData = [];
-  const [eventList, seteventList] = useState([]);
+  const [eventData, seteventData] = useState([]);
   const value = useAppContext();
-  let { setisRegisterVisible, eventList: eventData } = value.state;
+  const { setisRegisterVisible, eventList } = value.state;
   useEffect(() => {
     if (router.isReady) {
-      console.log(eventData, "data");
-      if (eventData) {
-        filteredEventData = eventData.filter((item) => {
+      console.log(eventList, "data");
+      if (eventList) {
+        filteredEventData = eventList.filter((item) => {
           return item.competition_genre == id;
         });
-        console.log(eventData, "event data");
+        console.log(eventList, "event data");
         console.log(filteredEventData);
         if (filteredEventData.length == 0) {
           console.log(filteredEventData.length == 0, "really");
@@ -26,19 +26,19 @@ function CompetitionDetails() {
         }
       }
 
-      seteventList(filteredEventData[0]);
+      seteventData(filteredEventData[0]);
     }
-  }, [router.isReady, eventData]);
+  }, [router.isReady, eventList]);
 
   return (
     <div className={classes.container} style={{ textAlign: "center" }}>
       <h1
         style={{ color: "white", textTransform: "uppercase", fontSize: "40px" }}
       >
-        {eventList?.name}
+        {eventData?.name}
       </h1>
       <div className={classes.event_list}>
-        {eventList.length == 0 ? (
+        {eventData.length == 0 ? (
           <Spin
             indicator={
               <LoadingOutlined
@@ -49,7 +49,7 @@ function CompetitionDetails() {
             }
           />
         ) : (
-          eventList?.events?.map((item, i) => {
+          eventData?.events?.map((item, i) => {
             return (
               <Card
                 key={i}
