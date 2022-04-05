@@ -60,6 +60,19 @@ li {
 .ant-notification-notice-with-icon .ant-notification-notice-message {
   color: white;
 }
+/* scroller */
+body::-webkit-scrollbar {
+  width: 0.1em;
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(169, 169, 169, 0.521);
+  outline: 0.1px solid rgba(112, 128, 144, 0.554);
+}
 
 /* .registration_form {
   background-color: rgb(34, 34, 34);

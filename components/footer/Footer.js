@@ -34,7 +34,8 @@ const Footer = () => {
         <h3>Our Team</h3>
         <p>Oriental College of Technology</p>
         <p>oistbpl@oriental.ac.in</p>
-        <p>0755-2529026</p>
+        <p>For Enquiry</p>
+        <p>Techfizz@oriental.ac.in</p>
       </div>
       <div className={classes.box}>
         <h3>Contact Us</h3>
