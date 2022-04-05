@@ -8,7 +8,14 @@ import Header from "../components/header/Header";
 import { AppWrapper } from "../context/state";
 import Footer from "../components/footer/Footer";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useRouter } from "next/router";
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+
+  if (router.pathname == "/404") {
+    return <Component {...pageProps} />;
+  }
+
   return (
     <AppWrapper>
       <Head>

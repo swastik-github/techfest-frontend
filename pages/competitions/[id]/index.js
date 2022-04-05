@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Card, Divider, Modal } from "antd";
+import { Card, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import classes from "./eventlist.module.css";
 import { useAppContext } from "../../../context/state";
 function CompetitionDetails() {
@@ -12,13 +13,18 @@ function CompetitionDetails() {
   let { setisRegisterVisible, eventList: eventData } = value.state;
   useEffect(() => {
     if (router.isReady) {
-      filteredEventData = eventData?.filter((item) => {
-        return item.competition_genre == id;
-      });
+      if (eventData) {
+        filteredEventData = eventData?.filter((item) => {
+          return item.competition_genre == id;
+        });
+      }
+      if (filteredEventData.length == 0) {
+        return router.push("/404");
+      }
 
       seteventList(filteredEventData[0]);
     }
-  }, [router.isReady]);
+  }, [router.isReady, eventData]);
 
   return (
     <div className={classes.container} style={{ textAlign: "center" }}>
@@ -28,10 +34,21 @@ function CompetitionDetails() {
         {eventList?.name}
       </h1>
       <div className={classes.event_list}>
-        {eventList &&
-          eventList?.events?.map((item) => {
+        {eventList.length == 0 ? (
+          <Spin
+            indicator={
+              <LoadingOutlined
+                size="large"
+                style={{ fontSize: 42, color: "white" }}
+                spin
+              />
+            }
+          />
+        ) : (
+          eventList?.events?.map((item, i) => {
             return (
               <Card
+                key={i}
                 className={"event_cards"}
                 style={{
                   borderRadius: "5px",
@@ -98,7 +115,8 @@ function CompetitionDetails() {
                 </div>
               </Card>
             );
-          })}
+          })
+        )}
       </div>
     </div>
   );

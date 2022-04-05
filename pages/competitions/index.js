@@ -1,42 +1,52 @@
 import React, { useState, useEffect } from "react";
-import { Card, Modal } from "antd";
-import Image from "next/image";
+import { Card, Modal, Image, Spin } from "antd";
 import { useRouter } from "next/router";
 import classes from "./competition.module.css";
 import clsx from "clsx";
+import { LoadingOutlined } from "@ant-design/icons";
 import { useAppContext } from "../../context/state";
 function Competitions() {
   const router = useRouter();
   const values = useAppContext();
   const { eventList } = values.state;
-  // const [eventList, setEventList] = useState([])
-  // useEffect(() => {
-  //   setEventList(eventData);
-  // }, []);
+
   return (
     <div className={classes.container}>
       <h1 className="heading">COMPETITONS</h1>
       <div className={classes.site_card_wrapper}>
-        {eventList?.map((ev) => (
-          <Card
-            onClick={() =>
-              router.push(`/competitions/${ev?.competition_genre}`)
+        {eventList.length == 0 ? (
+          <Spin
+            indicator={
+              <LoadingOutlined
+                size="large"
+                style={{ fontSize: 42, color: "white" }}
+                spin
+              />
             }
-            bordered={false}
-            className={classes.cardss}
-          >
-            <Image
-              width={380}
-              height={250}
-              src={"/images/coding.jpg"}
-              alt={ev?.name}
-            />
-            <div className={classes.headLine}>
-              <h3> {ev?.name} </h3>
-              <p> Explore</p>
-            </div>
-          </Card>
-        ))}
+          />
+        ) : (
+          eventList?.map((ev, i) => (
+            <Card
+              key={i}
+              onClick={() =>
+                router.push(`/competitions/${ev?.competition_genre}`)
+              }
+              bordered={false}
+              className={classes.cardss}
+            >
+              <Image
+                width={380}
+                height={250}
+                src={"/images/coding.jpg"}
+                alt={ev?.name}
+              />
+              <div className={classes.headLine}>
+                <h3> {ev?.name} </h3>
+                <p> Explore</p>
+              </div>
+            </Card>
+          ))
+        )}
       </div>
       <div style={{ marginTop: "20px" }} className={classes.site_card_wrapper}>
         <Card

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import classes from "./Footer.module.css";
-import Image from "next/image";
+import { Image } from "antd";
 const Footer = () => {
   const router = useRouter();
   return (
@@ -48,6 +48,7 @@ const Footer = () => {
             <Image
               width={43}
               height={43}
+              preview={false}
               src={"/images/instagram.png"}
               alt=""
             />
@@ -57,17 +58,35 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image width={43} height={43} src={"/images/facebook.png"} alt="" />
+            <Image
+              width={43}
+              height={43}
+              preview={false}
+              src={"/images/facebook.png"}
+              alt=""
+            />
           </a>
           <a href="" target="_blank" rel="noopener noreferrer">
-            <Image width={43} height={43} src={"/images/twitter.png"} alt="" />
+            <Image
+              width={43}
+              height={43}
+              preview={false}
+              src={"/images/twitter.png"}
+              alt=""
+            />
           </a>
           <a
             href="https://www.youtube.com/watch?v=Y1xGqD_icBY"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image width={43} height={43} src={"/images/youtube.png"} alt="" />
+            <Image
+              width={43}
+              height={43}
+              preview={false}
+              src={"/images/youtube.png"}
+              alt=""
+            />
           </a>
         </div>
       </div>

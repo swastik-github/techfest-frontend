@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import classes from "./eventdetails.module.css";
-import { Button, Image, Modal, Typography, message, Alert } from "antd";
+import { Button, Image, Modal, Typography, message, Spin } from "antd";
 import { useAppContext } from "../../../../context/state";
 import { CheckCircleTwoTone, CloseCircleOutlined } from "@ant-design/icons";
 import { Form, Input, InputNumber, Select, Checkbox } from "antd";
@@ -39,7 +39,7 @@ function CompetitionDetails() {
   const [isPaymentDone, setIsPaymentDone] = useState(false);
   const [paymentDetails, setPaymentDetails] = useState({});
   const initalRegisterValue = isRegisterVisible;
-  const [eventDetails, seteventDetails] = useState({});
+  const [eventDetails, seteventDetails] = useState(null);
   const [activeDetails, setActiveDetails] = useState("about");
   const [visible, setVisible] = useState(initalRegisterValue);
 
@@ -66,18 +66,29 @@ function CompetitionDetails() {
   useEffect(async () => {
     if (router.isReady) {
       let filterdEvents = [];
-      filterdEvents = eventList?.filter((item) => {
-        return item.competition_genre == id;
-      });
+      if (eventList) {
+        filterdEvents = eventList?.filter((item) => {
+          return item.competition_genre == id;
+        });
+
+        if (filterdEvents.length == 0) {
+          return router.push("/404");
+        }
+      }
 
       let filterdEventsDetails = [];
-      filterdEventsDetails = filterdEvents[0]?.events?.filter((item) => {
-        return item.event_id == event;
-      });
+      if (filterdEvents.length > 0) {
+        filterdEventsDetails = filterdEvents[0]?.events?.filter((item) => {
+          return item.event_id == event;
+        });
+        if (filterdEventsDetails.length == 0) {
+          router.push("/404");
+        }
+      }
 
       seteventDetails(filterdEventsDetails?.[0]);
     }
-  }, [router.isReady]);
+  }, [router.isReady, eventList]);
 
   let options = {
     weekday: "long",
@@ -172,152 +183,175 @@ function CompetitionDetails() {
 
   return (
     <div className={classes.container}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
-        <div className={classes.container_box}>
-          <div className={classes.img_container}>
-            <img src="https://picsum.photos/250/300" />
-            <Button
-              onClick={() => setVisible(true)}
-              style={{
-                margin: "10px 0",
-                backgroundColor: "purple",
-                border: "none",
-                fontSize: "16px",
-              }}
-              type="primary"
-            >
-              Register
-            </Button>
-          </div>
-          <div className={classes.eventdetail_container}>
-            <Title style={{ margin: "0", fontSize: "40px", color: "white" }}>
-              {eventDetails?.event_name}
-              <p style={{ margin: "0", fontSize: "16px", fontWeight: "400" }}>
-                Price: {eventDetails?.event_price}
-              </p>
-            </Title>
-
-            <div className={classes.eventdetail_headlines}>
-              <span
+      {eventDetails !== null ? (
+        <div
+          style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}
+        >
+          <div className={classes.container_box}>
+            <div className={classes.img_container}>
+              <img src="https://picsum.photos/250/300" />
+              <Button
+                onClick={() => setVisible(true)}
                 style={{
-                  cursor: "pointer",
-                  color: activeDetails == "about" ? "white" : "gray",
+                  margin: "10px 0",
+                  backgroundColor: "purple",
+                  border: "none",
+                  fontSize: "16px",
                 }}
-                onClick={() => {
-                  setActiveDetails("about");
-                }}
+                type="primary"
               >
-                About
-              </span>
-              <span
-                style={{
-                  cursor: "pointer",
-                  color: activeDetails == "timeline" ? "white" : "gray",
-                }}
-                onClick={() => {
-                  setActiveDetails("timeline");
-                }}
-              >
-                Timeline
-              </span>
-              <span
-                style={{
-                  cursor: "pointer",
-                  color: activeDetails == "rules" ? "white" : "gray",
-                }}
-                onClick={() => {
-                  setActiveDetails("rules");
-                }}
-              >
-                Rules
-              </span>
-              <span
-                style={{
-                  cursor: "pointer",
-                  color: activeDetails == "contact" ? "white" : "gray",
-                }}
-                onClick={() => {
-                  setActiveDetails("contact");
-                }}
-              >
-                Contact Us
-              </span>
+                Register
+              </Button>
             </div>
-            {activeDetails == "about" && (
-              <div className={classes.eventdetails_details}>
-                {eventDetails?.event_venue?.map((item) => {
-                  return (
-                    <div>
-                      <p style={{ marginBottom: "8px" }}>
-                        {item.timing} {item.date}
-                      </p>
-                      <p style={{ marginBottom: "8px" }}>{item.place}</p>
-                    </div>
-                  );
-                })}
-                <p>{eventDetails?.event_description}</p>
+            <div className={classes.eventdetail_container}>
+              <Title style={{ margin: "0", fontSize: "40px", color: "white" }}>
+                {eventDetails?.event_name}
+                <p style={{ margin: "0", fontSize: "16px", fontWeight: "400" }}>
+                  Price: {eventDetails?.event_price}
+                </p>
+              </Title>
+
+              <div className={classes.eventdetail_headlines}>
+                <span
+                  style={{
+                    cursor: "pointer",
+                    color: activeDetails == "about" ? "white" : "gray",
+                  }}
+                  onClick={() => {
+                    setActiveDetails("about");
+                  }}
+                >
+                  About
+                </span>
+                <span
+                  style={{
+                    cursor: "pointer",
+                    color: activeDetails == "timeline" ? "white" : "gray",
+                  }}
+                  onClick={() => {
+                    setActiveDetails("timeline");
+                  }}
+                >
+                  Timeline
+                </span>
+                <span
+                  style={{
+                    cursor: "pointer",
+                    color: activeDetails == "rules" ? "white" : "gray",
+                  }}
+                  onClick={() => {
+                    setActiveDetails("rules");
+                  }}
+                >
+                  Rules
+                </span>
+                <span
+                  style={{
+                    cursor: "pointer",
+                    color: activeDetails == "contact" ? "white" : "gray",
+                  }}
+                  onClick={() => {
+                    setActiveDetails("contact");
+                  }}
+                >
+                  Contact Us
+                </span>
               </div>
-            )}
-            {activeDetails == "timeline" && (
-              <div className={classes.eventdetails_details}>
-                <Title level={5} style={{ color: "white", margin: "0 0 10px" }}>
-                  Registration Opening Date:
-                </Title>
-                <Text style={{ color: "white", marginTop: "5px" }}>
-                  {new Date(2022, 3, 4).toLocaleDateString("en-US", options)}
-                </Text>
-                <Title level={5} style={{ color: "white", marginTop: "15px" }}>
-                  Final Submission Deadline:
-                </Title>
-                <Text style={{ color: "white", marginTop: "5px" }}>
-                  {new Date(2022, 3, 21).toLocaleDateString("en-US", options)}
-                </Text>
-              </div>
-            )}
-            {activeDetails == "rules" && (
-              <div className={classes.eventdetails_details}>
-                <ul style={{ listStyletype: "circle" }}>
-                  {eventDetails?.event_rules?.map((item) => {
+              {activeDetails == "about" && (
+                <div className={classes.eventdetails_details}>
+                  {eventDetails?.event_venue?.map((item, i) => {
                     return (
-                      <li style={{ padding: "5px 0", fontSize: "15px" }}>
-                        {item}
-                      </li>
+                      <div key={i}>
+                        <p style={{ marginBottom: "8px" }}>
+                          {item.timing} {item.date}
+                        </p>
+                        <p style={{ marginBottom: "8px" }}>{item.place}</p>
+                      </div>
                     );
                   })}
-                </ul>
-              </div>
-            )}
-            {activeDetails == "contact" && (
-              <div className={classes.eventdetails_details}>
-                {eventDetails?.contact?.map((item) => {
-                  return (
-                    <div>
-                      <p
-                        style={{
-                          color: "white",
-                          fontSize: "16px",
-                          marginBottom: "8px",
-                        }}
-                      >
-                        {item?.name}
-                      </p>
-                      <p
-                        style={{
-                          color: "white",
-                          fontSize: "16px",
-                          marginBottom: "8px",
-                        }}
-                      >
-                        {item?.phone_no}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+                  <p>{eventDetails?.event_description}</p>
+                </div>
+              )}
+              {activeDetails == "timeline" && (
+                <div className={classes.eventdetails_details}>
+                  <Title
+                    level={5}
+                    style={{ color: "white", margin: "0 0 10px" }}
+                  >
+                    Registration Opening Date:
+                  </Title>
+                  <Text style={{ color: "white", marginTop: "5px" }}>
+                    {new Date(2022, 3, 4).toLocaleDateString("en-US", options)}
+                  </Text>
+                  <Title
+                    level={5}
+                    style={{ color: "white", marginTop: "15px" }}
+                  >
+                    Final Submission Deadline:
+                  </Title>
+                  <Text style={{ color: "white", marginTop: "5px" }}>
+                    {new Date(2022, 3, 21).toLocaleDateString("en-US", options)}
+                  </Text>
+                </div>
+              )}
+              {activeDetails == "rules" && (
+                <div className={classes.eventdetails_details}>
+                  <ul style={{ listStyletype: "circle" }}>
+                    {eventDetails?.event_rules?.map((item, i) => {
+                      return (
+                        <li
+                          key={i}
+                          style={{ padding: "5px 0", fontSize: "15px" }}
+                        >
+                          {item}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+              {activeDetails == "contact" && (
+                <div className={classes.eventdetails_details}>
+                  {eventDetails?.contact?.map((item, i) => {
+                    return (
+                      <div key={i}>
+                        <p
+                          style={{
+                            color: "white",
+                            fontSize: "16px",
+                            marginBottom: "8px",
+                          }}
+                        >
+                          {item?.name}
+                        </p>
+                        <p
+                          style={{
+                            color: "white",
+                            fontSize: "16px",
+                            marginBottom: "8px",
+                          }}
+                        >
+                          {item?.phone_no}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <Spin
+          indicator={
+            <LoadingOutlined
+              size="large"
+              style={{ fontSize: 42, color: "white" }}
+              spin
+            />
+          }
+        />
+      )}
       <Modal
         title={
           <Title level={2} style={{ color: "white", margin: "0" }}>
@@ -390,6 +424,36 @@ function CompetitionDetails() {
               ]}
             >
               <Input />
+            </Form.Item>
+            <Form.Item
+              name="last_name"
+              label={<label style={{}}>Last Name</label>}
+              tooltip="What do you want others to call you?"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your nickname!",
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="event_type"
+              label={<label style={{}}>Participates</label>}
+              tooltip="no. of people participating"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your participating type!",
+                },
+              ]}
+            >
+              <Select placeholder="select your partipate type">
+                <Option value="College">Solo</Option>
+                <Option value="School">Duo</Option>
+              </Select>
             </Form.Item>
             <Form.Item
               name="institution"
