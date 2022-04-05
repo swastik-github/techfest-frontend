@@ -105,7 +105,7 @@ function CompetitionDetails() {
           handleApiError(err.response);
         });
     }
-  }, [router.isReady, eventList]);
+  }, [router.isReady]);
 
   let options = {
     weekday: "long",
@@ -359,15 +359,19 @@ function CompetitionDetails() {
           </div>
         </div>
       ) : (
-        <Spin
-          indicator={
-            <LoadingOutlined
-              size="large"
-              style={{ fontSize: 42, color: "white" }}
-              spin
-            />
-          }
-        />
+        <div
+          style={{ width: "100%", display: "flex", justifyContent: "center" }}
+        >
+          <Spin
+            indicator={
+              <LoadingOutlined
+                size="large"
+                style={{ fontSize: 42, color: "white" }}
+                spin
+              />
+            }
+          />
+        </div>
       )}
       <Modal
         title={
