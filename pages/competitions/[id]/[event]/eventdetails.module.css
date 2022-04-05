@@ -69,7 +69,7 @@
   border: 0.5px solid white !important;
   height: 250px;
   border-radius: 5px !important;
-  overflow: scroll;
+  overflow-y: scroll;
   backdrop-filter: blur(5px);
   transition: step-start 2s;
 }
