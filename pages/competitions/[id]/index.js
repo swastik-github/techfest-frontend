@@ -9,8 +9,8 @@ function CompetitionDetails() {
   const { id } = router.query;
   let filteredEventData = [];
   const [eventData, seteventData] = useState([]);
-  const value = useAppContext();
-  const { setisRegisterVisible, eventList } = value.state;
+  const values = useAppContext();
+  const { setisRegisterVisible, eventList } = values.state;
   useEffect(() => {
     if (router.isReady) {
       console.log(eventList, "data");
