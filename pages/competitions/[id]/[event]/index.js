@@ -99,7 +99,6 @@ function CompetitionDetails() {
           } else {
             router.push("/404");
           }
-          console.log(filterdEventsDetails);
           seteventDetails(filterdEventsDetails?.[0]);
         })
         .catch((err) => {
@@ -116,7 +115,17 @@ function CompetitionDetails() {
   };
 
   const [form] = Form.useForm();
-  const onFinish = async (values) => {
+  const onFinish = async (value) => {
+    let priceObj = eventDetails.event_price.filter((i) => {
+      return i.key == value.participation_type;
+    });
+    let values = {
+      ...value,
+      participation_type: {
+        key: priceObj[0].key,
+        price: priceObj[0].price,
+      },
+    };
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -207,7 +216,7 @@ function CompetitionDetails() {
         >
           <div className={classes.container_box}>
             <div className={classes.img_container}>
-              <img src="https://images.unsplash.com/photo-1580830488699-3f7472613b11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" />
+              <img src={eventDetails.event_img} alt="event" />
               <Button
                 onClick={() => setVisible(true)}
                 style={{
@@ -468,22 +477,9 @@ function CompetitionDetails() {
             >
               <Input />
             </Form.Item>
+
             <Form.Item
-              name="last_name"
-              label={<label style={{}}>Last Name</label>}
-              tooltip="What do you want others to call you?"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your nickname!",
-                  whitespace: true,
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="event_type"
+              name="participation_type"
               label={<label style={{}}>Participates</label>}
               tooltip="no. of people participating"
               rules={[
@@ -494,8 +490,9 @@ function CompetitionDetails() {
               ]}
             >
               <Select placeholder="select your partipate type">
-                <Option value="College">Solo</Option>
-                <Option value="School">Duo</Option>
+                {eventDetails?.event_price.map((e) => {
+                  return <Option value={e.key}>{e.key}</Option>;
+                })}
               </Select>
             </Form.Item>
             <Form.Item

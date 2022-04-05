@@ -70,6 +70,9 @@
   .about_slider {
     width: 80%;
   }
+  .about_slider_image {
+    height: 100%;
+  }
   .about_slide {
     height: 15rem;
   }

@@ -3,7 +3,7 @@
   display: flex;
   height: 70vh;
   margin-top: 100px;
-  margin-bottom: 500px;
+  margin-bottom: 200px;
   justify-content: space-around;
 
   width: 100%;
@@ -16,6 +16,7 @@
 }
 .about_img img {
   height: 300px;
+  object-fit: cover;
 }
 .about_content {
   color: #fff;
@@ -63,26 +64,43 @@
   }
 }
 @media (max-width: 940px) and (min-width: 700px) {
+  .about{
+    margin-bottom: 500px;
+  }
   .about_content {
     margin-top: 21rem !important;
   }
 }
 @media (max-width: 890px) and (min-width: 700px) {
+  .about{
+    margin-bottom: 500px;
+  }
   .about_content {
     margin-top: 30rem !important;
   }
 }
 @media (max-width: 700px) {
+  .about{
+    margin-bottom: 500px;
+  }
   .about_content {
     margin-top: 47rem !important;
   }
 }
 @media (max-width: 360px) {
+  .about{
+    margin-bottom: 500px;
+
+  }
   .about_content {
     margin-top: 60rem !important;
   }
 }
 @media (max-width: 280px) {
+  .about{
+    margin-bottom: 500px;
+
+  }
   .about_content {
     margin-top: 64rem !important;
   }

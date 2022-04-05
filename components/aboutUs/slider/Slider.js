@@ -5,14 +5,10 @@ const Slider = () => {
   const [activeAutoplay, setActiveAutoplay] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
   const autoplayRef = useRef();
-  const imglinks = [
-    "/images/coding.jpg",
-    "/images/dancing.jpg",
-    "/images/playing.jpg",
-  ];
+  const imglinks = ["/images/people.jpeg"];
 
   const settings = {
-    maxItems: 3,
+    maxItems: 1,
     speed: 1000,
     autoplay: true,
     autoplaySpeed: 2000,

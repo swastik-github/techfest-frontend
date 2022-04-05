@@ -34,7 +34,7 @@ function Competitions() {
               bordered={false}
               className={classes.cardss}
             >
-              <Image src={"/images/coding.jpg"} alt={ev?.name} />
+              <Image src={`/competitons/c${i + 1}.jpeg`} alt={ev?.name} />
               <div className={classes.headLine}>
                 <h3> {ev?.name} </h3>
                 <p> Explore</p>
@@ -56,7 +56,7 @@ function Competitions() {
             alt="hefd"
           />
           <div className={classes.headLine}>
-            <h3>TITLE SPONSORS </h3>
+            <h3>SPONSORS</h3>
           </div>
         </Card>
       </div>
