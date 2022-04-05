@@ -69,16 +69,12 @@ function CompetitionDetails() {
       filterdEvents = eventList?.filter((item) => {
         return item.competition_genre == id;
       });
-      if (filterdEvents.length == 0) {
-        router.push("/404");
-      }
+
       let filterdEventsDetails = [];
       filterdEventsDetails = filterdEvents[0]?.events?.filter((item) => {
         return item.event_id == event;
       });
-      if (filterdEventsDetails.length == 0) {
-        router.push("/404");
-      }
+
       seteventDetails(filterdEventsDetails?.[0]);
     }
   }, [router.isReady]);
@@ -530,7 +526,7 @@ function CompetitionDetails() {
           color: "white",
         }}
         footer={null}
-        width="50vw"
+        width={1000}
         visible={isPaymentDone}
         onOk={() => setIsPaymentDone(false)}
         onCancel={() => setIsPaymentDone(false)}
@@ -538,7 +534,6 @@ function CompetitionDetails() {
         <div
           style={{
             display: "flex",
-            height: "50vh",
             gap: "10px",
             flexDirection: "column",
             justifyContent: "center",

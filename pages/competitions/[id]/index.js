@@ -15,9 +15,7 @@ function CompetitionDetails() {
       filteredEventData = eventData?.filter((item) => {
         return item.competition_genre == id;
       });
-      if (filteredEventData.length == 0) {
-        router.push("/404");
-      }
+
       seteventList(filteredEventData[0]);
     }
   }, [router.isReady]);
