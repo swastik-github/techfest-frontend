@@ -14,7 +14,7 @@ function CompetitionDetails() {
   useEffect(() => {
     if (router.isReady) {
       console.log(eventList, "data");
-      if (eventList) {
+      if (eventList.length > 0) {
         filteredEventData = eventList.filter((item) => {
           return item.competition_genre == id;
         });
