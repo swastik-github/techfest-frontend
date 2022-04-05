@@ -14,12 +14,14 @@ function CompetitionDetails() {
   useEffect(() => {
     if (router.isReady) {
       if (eventData) {
-        filteredEventData = eventData?.filter((item) => {
+        filteredEventData = eventData.filter((item) => {
           return item.competition_genre == id;
         });
-      }
-      if (filteredEventData.length == 0) {
-        return router.push("/404");
+        console.log(filteredEventData);
+        if (filteredEventData.length == 0) {
+          console.log(filteredEventData.length == 0, "really");
+          // return router.push("/404");
+        }
       }
 
       seteventList(filteredEventData[0]);
