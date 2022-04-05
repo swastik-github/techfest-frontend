@@ -24,10 +24,11 @@ function CompetitionDetails() {
               return item.competition_genre == id;
             });
             if (filteredEventData.length == 0) {
-              console.log(filteredEventData.length == 0, "really");
               return router.push("/404");
             }
             seteventData(filteredEventData[0]);
+          } else {
+            router.push("/404");
           }
         })
         .catch((err) => {

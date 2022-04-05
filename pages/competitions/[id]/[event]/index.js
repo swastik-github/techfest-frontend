@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import classes from "./eventdetails.module.css";
-import { Button, Image, Modal, Typography, message, Spin } from "antd";
+import { Button, Modal, Typography, message, Spin } from "antd";
 import { useAppContext } from "../../../../context/state";
 import {
   CheckCircleTwoTone,
   CloseCircleOutlined,
   LoadingOutlined,
 } from "@ant-design/icons";
-import { Form, Input, InputNumber, Select, Checkbox } from "antd";
+import { Form, Input, InputNumber, Select } from "antd";
 import axios from "axios";
 import { handleApiError } from "../../../../utilites";
 const { Option } = Select;
@@ -39,7 +39,7 @@ function CompetitionDetails() {
   const router = useRouter();
   const { event, id } = router.query;
   const value = useAppContext();
-  let { isRegisterVisible, setisRegisterVisible, eventList } = value.state;
+  let { isRegisterVisible, setisRegisterVisible } = value.state;
   const [isPaymentDone, setIsPaymentDone] = useState(false);
   const [paymentDetails, setPaymentDetails] = useState({});
   const initalRegisterValue = isRegisterVisible;
@@ -69,28 +69,41 @@ function CompetitionDetails() {
   }
   useEffect(async () => {
     if (router.isReady) {
+      let eventList = [];
       let filterdEvents = [];
-      if (eventList) {
-        filterdEvents = eventList?.filter((item) => {
-          return item.competition_genre == id;
+      axios
+        .get(`${process.env.NEXT_PUBLIC_FETCH_API}/v1/events`)
+        .then((response) => {
+          eventList = response?.data?.competitions;
+
+          if (eventList.length > 0) {
+            filterdEvents = eventList?.filter((item) => {
+              return item.competition_genre == id;
+            });
+
+            if (filterdEvents.length == 0) {
+              return router.push("/404");
+            }
+          } else {
+            router.push("/404");
+          }
+
+          let filterdEventsDetails = [];
+          if (filterdEvents.length > 0) {
+            filterdEventsDetails = filterdEvents[0]?.events?.filter((item) => {
+              return item.event_id == event;
+            });
+            if (filterdEventsDetails.length == 0) {
+              router.push("/404");
+            }
+          } else {
+            router.push("/404");
+          }
+          seteventDetails(filterdEventsDetails?.[0]);
+        })
+        .catch((err) => {
+          handleApiError(err.response);
         });
-
-        if (filterdEvents.length == 0) {
-          return router.push("/404");
-        }
-      }
-
-      let filterdEventsDetails = [];
-      if (filterdEvents.length > 0) {
-        filterdEventsDetails = filterdEvents[0]?.events?.filter((item) => {
-          return item.event_id == event;
-        });
-        if (filterdEventsDetails.length == 0) {
-          router.push("/404");
-        }
-      }
-
-      seteventDetails(filterdEventsDetails?.[0]);
     }
   }, [router.isReady, eventList]);
 
