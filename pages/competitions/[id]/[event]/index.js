@@ -3,7 +3,11 @@ import { useRouter } from "next/router";
 import classes from "./eventdetails.module.css";
 import { Button, Image, Modal, Typography, message, Spin } from "antd";
 import { useAppContext } from "../../../../context/state";
-import { CheckCircleTwoTone, CloseCircleOutlined } from "@ant-design/icons";
+import {
+  CheckCircleTwoTone,
+  CloseCircleOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { Form, Input, InputNumber, Select, Checkbox } from "antd";
 import axios from "axios";
 import { handleApiError } from "../../../../utilites";
