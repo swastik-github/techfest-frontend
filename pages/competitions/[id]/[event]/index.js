@@ -206,7 +206,7 @@ function CompetitionDetails() {
         >
           <div className={classes.container_box}>
             <div className={classes.img_container}>
-              <img src="https://picsum.photos/250/300" />
+              <img src="https://images.unsplash.com/photo-1580830488699-3f7472613b11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80" />
               <Button
                 onClick={() => setVisible(true)}
                 style={{
