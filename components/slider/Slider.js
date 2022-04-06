@@ -97,34 +97,6 @@ const Slider = () => {
     );
   };
 
-  /* Dots */
-  // const dots = () => {
-  //   const totalItems = Array.apply(null, Array(settings.maxItems));
-  //   const dotsButtons = totalItems.map((item, index) => {
-  //     return (
-  //       <button
-  //         className="dot"
-  //         key={index.toString()}
-  //         onMouseEnter={pauseTimer}
-  //         onMouseLeave={playTimer}
-  //         onClick={() => goTo(index)}
-  //       >
-  //         {index + 1}
-  //       </button>
-  //     );
-  //   });
-  //   return <div className="dots">{dotsButtons}</div>;
-  // };
-
-  /* Pagination */
-  // const pagination = (index) => {
-  //   return (
-  //     <div className="pagination">
-  //       {index + 1}/{settings.maxItems}
-  //     </div>
-  //   );
-  // };
-
   /* Slide */
   const slide = (index) => {
     return (
@@ -142,8 +114,6 @@ const Slider = () => {
       {prevBtn()}
       {slide(currentIndex)}
       {nextBtn()}
-      {/* {dots()} */}
-      {/* {pagination(currentIndex)} */}
     </div>
   );
 };
