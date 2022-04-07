@@ -31,6 +31,13 @@ function MyEvents() {
         let eventIdList = response?.data?.events;
         let filteredSearchEvents = [];
         let idEventLength = eventIdList.length;
+        if (idEventLength == 0) {
+          handleApiError({
+            status: 400,
+            data: { errors: [{ message: "No account found here" }] },
+          });
+          return setIsLoading(false);
+        }
 
         for (let i = 0; i <= 2; i++) {
           if (idEventLength == 0) {
