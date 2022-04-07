@@ -13,7 +13,7 @@ export default function Home() {
       <Slider />
       <div style={{ marginBottom: "150px" }} className={classes.sponsors}>
         <h1>Sponsors</h1>
-        <Sponsors />
+        {/* <Sponsors /> */}
       </div>
     </div>
   );

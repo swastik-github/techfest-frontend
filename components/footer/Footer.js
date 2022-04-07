@@ -85,16 +85,20 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div style={{ maxWidth: "400px" }} className={classes.box}>
-        <h3>Contact us</h3>
+      <div style={{ maxWidth: "320px" }} className={classes.box}>
+        <h3>Contact Us</h3>
         <p>Oriental College of Technology</p>
         <p>
           Address: Oriental Campus, Opp Patel Nagar, Raisen A Road, Bhopal-
           462021
         </p>
-        <p style={{ textTransform: "uppercase" }}>For Work Enquiry</p>
-        <p>Shivali Verma - 9300003125</p>
-        <p>Techfizz@oriental.ac.in</p>
+      </div>
+      <div style={{ maxWidth: "400px" }} className={classes.box}>
+        <h3>For Enquiry</h3>
+        <p>Dr. Shivali Verma - 9300003125</p>
+        <p>Dr. Sonendra Gupta - 9893455006</p>
+        <p>Prof. Lalit Jain - 9179128221</p>
+        <p>techfizz@oriental.ac.in</p>
       </div>
     </div>
   );
