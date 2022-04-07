@@ -216,7 +216,10 @@ function CompetitionDetails() {
         >
           <div className={classes.container_box}>
             <div className={classes.img_container}>
-              <img src={eventDetails.event_img} alt="event" />
+              <img
+                src={eventDetails.event_img || "/images/pubg.jpeg"}
+                alt="event"
+              />
               <Button
                 onClick={() => setVisible(true)}
                 style={{
