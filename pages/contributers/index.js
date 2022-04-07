@@ -6,7 +6,9 @@ import { PhoneOutlined, LinkedinOutlined } from "@ant-design/icons";
 function Contributers() {
   return (
     <div className={classes.container}>
-      <h1 style={{ color: "white", fontSize: "46px" }}>COORDINATORS</h1>
+      <h1 style={{ color: "white", marginTop: "50px", fontSize: "32px" }}>
+        COORDINATORS
+      </h1>
 
       <div className={classes.contact_container}>
         {contributersData[1].team.map((item, i) => {
@@ -16,7 +18,13 @@ function Contributers() {
                 style={{ width: "100px", height: "100px" }}
                 src={item.avatar}
               />
-              <h3 style={{ color: "white", margin: "30px 0 10px" }}>
+              <h3
+                style={{
+                  color: "white",
+                  marginTop: "50px",
+                  margin: "30px 0 10px",
+                }}
+              >
                 {item.name}
               </h3>
               <p>{item.role}</p>
@@ -46,7 +54,9 @@ function Contributers() {
           );
         })}
       </div>
-      <h1 style={{ color: "white", fontSize: "46px" }}>DEVELOPERS</h1>
+      <h1 style={{ color: "white", marginTop: "50px", fontSize: "32px" }}>
+        DEVELOPERS
+      </h1>
 
       <div className={classes.contact_container}>
         {contributersData[0].team.map((item, i) => {
@@ -56,7 +66,13 @@ function Contributers() {
                 style={{ width: "100px", height: "100px" }}
                 src={item.avatar}
               />
-              <h3 style={{ color: "white", margin: "30px 0 10px" }}>
+              <h3
+                style={{
+                  color: "white",
+                  marginTop: "50px",
+                  margin: "30px 0 10px",
+                }}
+              >
                 {item.name}
               </h3>
               <p>{item.role}</p>
@@ -86,7 +102,9 @@ function Contributers() {
           );
         })}
       </div>
-      <h1 style={{ color: "white", fontSize: "46px" }}>DESGINERS</h1>
+      <h1 style={{ color: "white", marginTop: "50px", fontSize: "32px" }}>
+        DESIGNERS
+      </h1>
 
       <div className={classes.contact_container}>
         {contributersData[2].team.map((item, i) => {
@@ -96,7 +114,13 @@ function Contributers() {
                 style={{ width: "100px", height: "100px" }}
                 src={item.avatar}
               />
-              <h3 style={{ color: "white", margin: "30px 0 10px" }}>
+              <h3
+                style={{
+                  color: "white",
+                  marginTop: "50px",
+                  margin: "30px 0 10px",
+                }}
+              >
                 {item.name}
               </h3>
               <p>{item.role}</p>

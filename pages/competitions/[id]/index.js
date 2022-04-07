@@ -78,7 +78,7 @@ function CompetitionDetails() {
                       objectFit: "cover",
                     }}
                     alt={item.title}
-                    src={item.event_img}
+                    src={item.event_img || "/images/pubg.jpeg"}
                   />
                 }
               >
