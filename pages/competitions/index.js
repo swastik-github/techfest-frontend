@@ -44,10 +44,6 @@ function Competitions() {
           ))
         )}
       </div>
-      <div style={{ margin: "100px" }}>
-        <h3>SPONSORS</h3>
-        <Sponsors />
-      </div>
     </div>
   );
 }
