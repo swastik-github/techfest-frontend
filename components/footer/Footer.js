@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
 import React from "react";
 import classes from "./Footer.module.css";
+import { PhoneOutlined } from "@ant-design/icons";
 import { Image } from "antd";
 const Footer = () => {
   const router = useRouter();
   return (
     <div className={classes.container}>
-      <div className={classes.box}>
+      <div style={{ width: "270px !important" }} className={classes.box}>
         <h3>Quick Link</h3>
         <a
           href="https://docs.google.com/document/d/1Ti11tuYSd0rWg_sTxIddkgRBJelP8cSO-qpzHTj1fXA/edit?usp=sharing"
@@ -30,15 +31,9 @@ const Footer = () => {
           Terms and Conditions
         </a>
       </div>
-      <div className={classes.box}>
-        <h3>Our Team</h3>
-        <p>Oriental College of Technology</p>
-        <p>oistbpl@oriental.ac.in</p>
-        <p>For Enquiry</p>
-        <p>Techfizz@oriental.ac.in</p>
-      </div>
-      <div className={classes.box}>
-        <h3>Contact Us</h3>
+
+      <div style={{ alignItems: "center" }} className={classes.box}>
+        <h3>Follow us</h3>
         <div className={classes.socialMedia}>
           <a
             href="https://www.instagram.com/techfizz2022"
@@ -89,6 +84,17 @@ const Footer = () => {
             />
           </a>
         </div>
+      </div>
+      <div style={{ maxWidth: "400px" }} className={classes.box}>
+        <h3>Contact us</h3>
+        <p>Oriental College of Technology</p>
+        <p>
+          Address: Oriental Campus, Opp Patel Nagar, Raisen A Road, Bhopal-
+          462021
+        </p>
+        <p style={{ textTransform: "uppercase" }}>For Work Enquiry</p>
+        <p>Shivali Verma - 9300003125</p>
+        <p>Techfizz@oriental.ac.in</p>
       </div>
     </div>
   );

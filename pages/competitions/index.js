@@ -5,6 +5,7 @@ import classes from "./competition.module.css";
 import clsx from "clsx";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useAppContext } from "../../context/state";
+import Sponsors from "../../components/Sponsors";
 function Competitions() {
   const router = useRouter();
   const values = useAppContext();
@@ -14,7 +15,7 @@ function Competitions() {
     <div className={classes.container}>
       <h1 className="heading">COMPETITONS</h1>
       <div className={classes.site_card_wrapper}>
-        {eventList.length == 0 ? (
+        {eventList?.length == 0 ? (
           <Spin
             indicator={
               <LoadingOutlined
@@ -43,22 +44,9 @@ function Competitions() {
           ))
         )}
       </div>
-      <div style={{ marginTop: "20px" }} className={classes.site_card_wrapper}>
-        <Card
-          bordered={false}
-          className={clsx(classes.cardss, classes.titlesponser)}
-        >
-          <Image
-            width={300}
-            height={200}
-            style={{ opacity: "0" }}
-            src={"/images/dancing.jpg"}
-            alt="hefd"
-          />
-          <div className={classes.headLine}>
-            <h3>SPONSORS</h3>
-          </div>
-        </Card>
+      <div style={{ margin: "100px" }}>
+        <h3>SPONSORS</h3>
+        <Sponsors />
       </div>
     </div>
   );

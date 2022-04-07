@@ -3,7 +3,6 @@
   justify-content: space-around;
   padding: 4em 8em;
   gap: 20px;
-  flex-wrap: wrap;
   margin-top: auto;
   width: 100%;
   background: linear-gradient(to right, #192b53, #5c4176);

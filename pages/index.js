@@ -1,6 +1,7 @@
 import styles from "../styles/Home.module.css";
 import classes from "../components/header/header.module.css";
 import Slider from "../components/slider/Slider";
+import Sponsors from "../components/Sponsors";
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -12,6 +13,7 @@ export default function Home() {
       <Slider />
       <div style={{ marginBottom: "150px" }} className={classes.sponsors}>
         <h1>Sponsors</h1>
+        <Sponsors />
       </div>
     </div>
   );
