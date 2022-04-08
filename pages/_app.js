@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preload" as="image" href="/images/b1.webp"></link>
         <link rel="preload" as="image" href="/images/people.jpeg"></link>
+        <link rel="preload" as="image" href="/images/hamburger.png"></link>
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"

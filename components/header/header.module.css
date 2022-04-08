@@ -47,6 +47,9 @@
   margin-top: 22px;
   margin-left: 10px;
 }
+.registerBtn{
+  display: none;
+}
 .register {
   padding: 10px;
   cursor: pointer !important;
@@ -107,5 +110,10 @@
   }
   .hamburger {
     display: block;
+  }
+  .registerBtn{
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
   }
 }
