@@ -266,14 +266,16 @@ function CompetitionDetails() {
                       </p>
                     );
                   })}
-                <p style={{ fontSize: "14px", margin: "0" }}>
-                  <Text
-                    style={{ fontSize: "14px", margin: "0" }}
-                    type="warning"
-                  >
-                    Registration for this event is closed
-                  </Text>
-                </p>
+                {isDisable && (
+                  <p style={{ fontSize: "14px", margin: "0" }}>
+                    <Text
+                      style={{ fontSize: "14px", margin: "0" }}
+                      type="warning"
+                    >
+                      Registration for this event is closed
+                    </Text>
+                  </p>
+                )}
               </Title>
 
               <div className={classes.eventdetail_headlines}>
