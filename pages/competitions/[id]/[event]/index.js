@@ -42,6 +42,7 @@ function CompetitionDetails() {
   let { isRegisterVisible, setisRegisterVisible } = value.state;
   const [isPaymentDone, setIsPaymentDone] = useState(false);
   const [paymentDetails, setPaymentDetails] = useState({});
+  const [isDisable, setisDisable] = useState(false);
   const initalRegisterValue = isRegisterVisible;
   const [eventDetails, seteventDetails] = useState(null);
   const [activeDetails, setActiveDetails] = useState("about");
@@ -91,6 +92,9 @@ function CompetitionDetails() {
           let filterdEventsDetails = [];
           if (filterdEvents.length > 0) {
             filterdEventsDetails = filterdEvents[0]?.events?.filter((item) => {
+              if (event == "SE-6") {
+                setisDisable(true);
+              }
               return item.event_id == event;
             });
             if (filterdEventsDetails.length == 0) {
@@ -221,10 +225,10 @@ function CompetitionDetails() {
                 alt="event"
               />
               <Button
+                disabled={isDisable}
                 onClick={() => setVisible(true)}
                 style={{
                   margin: "10px 0",
-                  backgroundColor: "purple",
                   border: "none",
                   fontSize: "16px",
                 }}
@@ -236,30 +240,40 @@ function CompetitionDetails() {
             <div className={classes.eventdetail_container}>
               <Title style={{ margin: "0", fontSize: "40px", color: "white" }}>
                 {eventDetails?.event_name}
-                <p
-                  style={{
-                    margin: "0",
-                    fontSize: "16px",
-                    fontWeight: "400",
-                  }}
-                >
-                  {" "}
-                  <Text strong>Price -</Text>
+                {!isDisable && (
+                  <p
+                    style={{
+                      margin: "0",
+                      fontSize: "16px",
+                      fontWeight: "400",
+                    }}
+                  >
+                    {" "}
+                    <Text strong>Price -</Text>
+                  </p>
+                )}
+                {!isDisable &&
+                  eventDetails.event_price.map((price) => {
+                    return (
+                      <p
+                        style={{
+                          margin: "0",
+                          fontSize: "16px",
+                          fontWeight: "400",
+                        }}
+                      >
+                        {price.key}- {price.price}
+                      </p>
+                    );
+                  })}
+                <p style={{ fontSize: "14px", margin: "0" }}>
+                  <Text
+                    style={{ fontSize: "14px", margin: "0" }}
+                    type="warning"
+                  >
+                    Registration for this event is closed
+                  </Text>
                 </p>
-
-                {eventDetails.event_price.map((price) => {
-                  return (
-                    <p
-                      style={{
-                        margin: "0",
-                        fontSize: "16px",
-                        fontWeight: "400",
-                      }}
-                    >
-                      {price.key}- {price.price}
-                    </p>
-                  );
-                })}
               </Title>
 
               <div className={classes.eventdetail_headlines}>
@@ -422,7 +436,13 @@ function CompetitionDetails() {
         onCancel={() => setVisible(false)}
         width={1000}
       >
-        {
+        {isDisable ? (
+          <div style={{ textAlign: "center" }}>
+            <Title type="warning" level={3}>
+              Registration Closed for this event
+            </Title>
+          </div>
+        ) : (
           <Form
             className="registration_form"
             {...formItemLayout}
@@ -619,7 +639,7 @@ function CompetitionDetails() {
               </Button>
             </Form.Item>
           </Form>
-        }
+        )}
       </Modal>
       <Modal
         title={

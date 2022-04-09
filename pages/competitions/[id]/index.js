@@ -10,6 +10,7 @@ function CompetitionDetails() {
   const { id } = router.query;
   let filteredEventData = [];
   const [eventData, seteventData] = useState([]);
+  const [isDisable, setisDisable] = useState(false);
   const values = useAppContext();
   const { setisRegisterVisible } = values.state;
   useEffect(() => {
