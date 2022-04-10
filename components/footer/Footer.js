@@ -61,15 +61,6 @@ const Footer = () => {
               alt=""
             />
           </a>
-          <a href="" target="_blank" rel="noopener noreferrer">
-            <Image
-              width={43}
-              height={43}
-              preview={false}
-              src={"/images/twitter.png"}
-              alt=""
-            />
-          </a>
           <a
             href="https://www.youtube.com/watch?v=Y1xGqD_icBY"
             target="_blank"
