@@ -1,4 +1,33 @@
-.sponsors_container{
-    display: flex;
-    justify-content: center;
+.sponsors_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.sponsor_box {
+  margin: 0 auto !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.sponsor_box img {
+  width: 20%;
+  border-radius: 8px;
+}
+/* .sponsor_box img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 50%;
+} */
+@media screen and (max-width: 900px) {
+  .sponsor_box {
+    flex-direction: column;
+  }
+  .sponsor_box img {
+    width: 45%;
+  }
 }
