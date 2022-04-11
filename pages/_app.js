@@ -22,7 +22,9 @@ function MyApp({ Component, pageProps }) {
         <title>Techfizz 2k22 | Oriental College of Technology</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preload" as="image" href="/images/b1.webp"></link>
-        {/* <link rel="preload" as="image" href="/images/people.jpeg"></link> */}
+        <link rel="preload" as="image" href="/images/people.jpeg"></link>
+        <link rel="preload" as="image" href="/images/car.jpeg"></link>
+        <link rel="preload" as="image" href="/images/robot.jpeg"></link>
         <link rel="preload" as="image" href="/images/hamburger.png"></link>
         <link
           rel="preconnect"
