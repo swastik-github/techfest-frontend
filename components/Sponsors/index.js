@@ -28,6 +28,8 @@ function Sponsors() {
         <img src="/sponsors/s7.png" />
         <img src="/sponsors/s5.png" />
         <img src="/sponsors/s9.png" />
+        <img src="/sponsors/s10.png" />
+        <img src="/sponsors/s11.png" />
       </div>
     </div>
   );
