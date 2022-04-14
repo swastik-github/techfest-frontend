@@ -16,9 +16,19 @@
   width: 20%;
   border-radius: 8px;
 }
-.main_sponsors {
-  width: 26% !important;
+#high-sponsor {
+  width: 34% !important;
 }
+#food-partner {
+  width: 70% !important;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row !important;
+}
+.main_sponsors {
+  width: 20% !important;
+}
+
 .sponsor_box div {
   width: 20% !important;
   border-radius: 8px;
@@ -33,6 +43,9 @@
 @media screen and (max-width: 900px) {
   .sponsor_box {
     flex-direction: column;
+  }
+  #high-sponsor {
+    width: 80% !important;
   }
   .sponsor_box img {
     width: 45%;
