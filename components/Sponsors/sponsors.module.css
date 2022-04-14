@@ -16,6 +16,13 @@
   width: 20%;
   border-radius: 8px;
 }
+.main_sponsors {
+  width: 26% !important;
+}
+.sponsor_box div {
+  width: 20% !important;
+  border-radius: 8px;
+}
 /* .sponsor_box img {
   display: block;
   margin-left: auto;
@@ -29,5 +36,8 @@
   }
   .sponsor_box img {
     width: 45%;
+  }
+  .main_sponsors {
+    width: 60% !important;
   }
 }
