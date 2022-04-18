@@ -10,18 +10,18 @@ function Sponsors() {
         <img
           id={classes["high-sponsor"]}
           className={classes.main_sponsors}
-          src="/sponsors/s6.jpg"
+          src="/sponsors/s6.png"
         />
         <img className={classes.main_sponsors} src="/sponsors/s1.jpeg" />
       </div>
 
       <h1>Event Sponsors</h1>
       <div className={classes.sponsor_box}>
-        <img src="/sponsors/sheryians.png" />
-        <img src="/sponsors/s8.png" />
-        <img src="/sponsors/s3.png" />
+        <img id={classes["sheryians"]} src="/sponsors/sheryians.png" />
+        <img id={classes["made-easy"]} src="/sponsors/s3.png" />
+        <img id={classes["salon"]} src="/sponsors/s12.png" />
+        <img id={classes["gym"]} src="/sponsors/s8.png" />
       </div>
-
       <h1>Food Partners</h1>
       <div id={classes["food-partner"]} className={classes.sponsor_box}>
         <img src="/sponsors/s2.jpeg" />
@@ -30,6 +30,8 @@ function Sponsors() {
         <img src="/sponsors/s9.png" />
         <img src="/sponsors/s10.png" />
         <img src="/sponsors/s11.png" />
+        <img src="/sponsors/s13.png" />
+        <img src="/sponsors/s14.png" />
       </div>
     </div>
   );

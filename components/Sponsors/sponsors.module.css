@@ -8,6 +8,7 @@
   margin: 0 auto !important;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 20px;
@@ -52,5 +53,14 @@
   }
   .main_sponsors {
     width: 60% !important;
+  }
+  #sheryians {
+    width: 70%;
+  }
+  #made-easy {
+    width: 55%;
+  }
+  #salon {
+    width: 55%;
   }
 }
