@@ -21,6 +21,9 @@ function Sponsors() {
         <img id={classes["made-easy"]} src="/sponsors/s3.png" />
         <img id={classes["salon"]} src="/sponsors/s12.png" />
         <img id={classes["gym"]} src="/sponsors/s8.png" />
+        <img src="/sponsors/s15.png" />
+        <img src="/sponsors/s16.png" />
+        <img src="/sponsors/s17.png" />
       </div>
       <h1>Food Partners</h1>
       <div id={classes["food-partner"]} className={classes.sponsor_box}>
