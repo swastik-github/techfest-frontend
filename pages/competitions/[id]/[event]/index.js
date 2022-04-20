@@ -42,7 +42,7 @@ function CompetitionDetails() {
   let { isRegisterVisible, setisRegisterVisible } = value.state;
   const [isPaymentDone, setIsPaymentDone] = useState(false);
   const [paymentDetails, setPaymentDetails] = useState({});
-  const [isDisable, setisDisable] = useState(false);
+  const [isDisable, setisDisable] = useState(true);
   const initalRegisterValue = isRegisterVisible;
   const [eventDetails, seteventDetails] = useState(null);
   const [activeDetails, setActiveDetails] = useState("about");
@@ -92,14 +92,6 @@ function CompetitionDetails() {
           let filterdEventsDetails = [];
           if (filterdEvents.length > 0) {
             filterdEventsDetails = filterdEvents[0]?.events?.filter((item) => {
-              if (
-                event == "SE-6" ||
-                event == "SE-3" ||
-                event == "SE-2" ||
-                event == "SE-4"
-              ) {
-                setisDisable(true);
-              }
               return item.event_id == event;
             });
             if (filterdEventsDetails.length == 0) {
@@ -277,7 +269,8 @@ function CompetitionDetails() {
                       style={{ fontSize: "14px", margin: "0" }}
                       type="warning"
                     >
-                      Registration for this event is closed
+                      Registration for events on the website is closed you can
+                      still register On-spot at Oct Campus
                     </Text>
                   </p>
                 )}
@@ -446,7 +439,8 @@ function CompetitionDetails() {
         {isDisable ? (
           <div style={{ textAlign: "center" }}>
             <Title type="warning" level={3}>
-              Registration Closed for this event
+              Registration for events on the website is closed you can still
+              register On-spot at Oct Campus
             </Title>
           </div>
         ) : (
