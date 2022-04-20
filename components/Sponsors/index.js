@@ -13,11 +13,13 @@ function Sponsors() {
           src="/sponsors/s6.png"
         />
         <img className={classes.main_sponsors} src="/sponsors/s1.jpeg" />
+        <img className={classes.main_sponsors} src="/sponsors/s19.png" />
       </div>
 
       <h1>Event Sponsors</h1>
       <div className={classes.sponsor_box}>
         <img id={classes["sheryians"]} src="/sponsors/sheryians.png" />
+        <img id={classes["sheryians"]} src="/sponsors/s18.png" />
         <img id={classes["made-easy"]} src="/sponsors/s3.png" />
         <img id={classes["salon"]} src="/sponsors/s12.png" />
         <img id={classes["gym"]} src="/sponsors/s8.png" />
