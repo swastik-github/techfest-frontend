@@ -92,7 +92,12 @@ function CompetitionDetails() {
           let filterdEventsDetails = [];
           if (filterdEvents.length > 0) {
             filterdEventsDetails = filterdEvents[0]?.events?.filter((item) => {
-              if (event == "SE-6") {
+              if (
+                event == "SE-6" ||
+                event == "SE-3" ||
+                event == "SE-2" ||
+                event == "SE-4"
+              ) {
                 setisDisable(true);
               }
               return item.event_id == event;
