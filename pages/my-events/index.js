@@ -14,6 +14,7 @@ function MyEvents() {
   const { eventList: eventData } = value.state;
   useEffect(() => {
     if (eventData) {
+      //context event list is available
       setIsLoading(false);
     }
   }, []);
