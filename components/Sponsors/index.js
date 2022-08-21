@@ -1,7 +1,6 @@
 import React from "react";
 import classes from "./sponsors.module.css";
-import { Typography } from "antd";
-const { Title, Text } = Typography;
+
 function Sponsors() {
   return (
     <div className={classes.sponsors_container}>
