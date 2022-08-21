@@ -8,6 +8,7 @@ export function AppWrapper({ children }) {
   const [isRegisterVisible, setisRegisterVisible] = useState(false);
   const [eventList, setEventList] = useState([]);
   useEffect(async () => {
+    //fetch event list
     let response;
     try {
       response = await axios.get(
