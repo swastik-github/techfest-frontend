@@ -8,6 +8,7 @@ export const handleApiError = (res) => {
   // });
 
   switch (res?.status) {
+    //response status code
     case 400:
       Notification("error", "Error", res.data?.errors[0]?.message);
       break;
